@@ -10,7 +10,8 @@ typedef enum {
 class Player {
 public:
 	string name;
-	Colour_t Colour;
+	string colourName;
+	Colour_t colour;
 
 };
 
