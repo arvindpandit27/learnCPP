@@ -33,5 +33,14 @@ int main(){
     box1.setBreadth(5.0) ;
     box1.SetHeight(2.0) ;
     cout << box1.getVolume() << endl ; 
+
+    int k = 0;
+    int m = !5 ;
+    cout << m << endl ;
+    if(!k--)
+    {
+        cout << "enters condition" << endl ;
+        cout << k << endl ;
+    }
     return 0;
 }
