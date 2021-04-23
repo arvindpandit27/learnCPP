@@ -20,11 +20,5 @@ int main() {
 		Player[i].colourName = name;
 	}
 	
-	// Plyaer* a = new Player[N];  // dynamic allocation 
-	//Player[0].name = "Arvind";
-	//Player[1].name = "Chetan";
-
-	//cout << "1st player: " << Player[0].name << endl;
-	//cout << "2nd player: " << Player[1].name << endl;
 	return 0;
 }
