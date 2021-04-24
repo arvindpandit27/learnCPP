@@ -5,6 +5,7 @@
 
 int main() {
 	int NPlayers;
+	cout << "Enter number of players" << endl;
 	cin >> NPlayers ;
 	Player User[NPlayers];
 	Player PlayerA ;
