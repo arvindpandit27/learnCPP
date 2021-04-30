@@ -1,7 +1,17 @@
 #include <iostream>
 #include "typedefs.hpp"
 #include <cmath>
+#include "windows.h"
+#include <cstdlib>
 
+int rolldice(){
+	int dice_value;
+	dice_value = rand() % 5;
+	if(dice_value == 5){
+		dice_value = 8;
+	}
+	return dice_value;
+}
 
 int main() {
 	int NPlayers;
@@ -23,5 +33,16 @@ int main() {
 	}
 	
 	User[0].Coin[0].x = 1;
+
+	cout << "Left click to roll dice" << endl;
+	if( GetAsyncKeyState(VK_LBUTTON) & 0x8000){
+		// cout << rolldice() << endl;
+		cout << "Left Button Clicked" << endl;
+	}
+
+	cout << rolldice() << endl;
 	return 0;
 }
+
+
+
