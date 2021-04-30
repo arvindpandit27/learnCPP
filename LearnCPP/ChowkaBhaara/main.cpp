@@ -36,13 +36,13 @@ int main() {
 	
 	User[0].Coin[0].x = 1;
 
-	cout << "Left click to roll dice" << endl;
-	if( GetAsyncKeyState(VK_LBUTTON) & 0x8000){
-		// cout << rolldice() << endl;
-		cout << "Left Button Clicked" << endl;
+	char keyboard_input;
+	cout << "Press r to roll dice" << endl;
+	cin >> keyboard_input;
+	if((int)keyboard_input == 114){
+		cout << rolldice() << endl;
 	}
 
-	cout << rolldice() << endl;
 	return 0;
 }
 
