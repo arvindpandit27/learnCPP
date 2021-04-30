@@ -37,9 +37,11 @@ int main() {
 	User[0].Coin[0].x = 1;
 
 	char keyboard_input;
+	int ascii_code;
 	cout << "Press r to roll dice" << endl;
 	cin >> keyboard_input;
-	if((int)keyboard_input == 114){
+	ascii_code = (int)keyboard_input;
+	if(ascii_code == 82 || ascii_code == 114){
 		cout << rolldice() << endl;
 	}
 
