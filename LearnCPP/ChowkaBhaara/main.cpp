@@ -3,10 +3,11 @@
 #include <cmath>
 #include "windows.h"
 #include <cstdlib>
+#include <ctime>
 
 int rolldice(){
 	int dice_value;
-	dice_value = rand() % 5;
+	dice_value = (rand() % 5) + 1;
 	if(dice_value == 5){
 		dice_value = 8;
 	}
@@ -14,6 +15,7 @@ int rolldice(){
 }
 
 int main() {
+	srand((unsigned) time(0));
 	int NPlayers;
 	cout << "Enter number of players" << endl;
 	cin >> NPlayers ;
