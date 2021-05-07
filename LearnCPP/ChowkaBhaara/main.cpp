@@ -1,7 +1,6 @@
 #include <iostream>
 #include "typedefs.hpp"
 #include <cmath>
-#include "windows.h"
 #include <cstdlib>
 #include <ctime>
 
@@ -43,14 +42,15 @@ int main()
 		User[i].colourName = name;
 	}
 
+	char keyboard_input;
+	int ascii_code;
+	int dice_value;
 	while (1)
 	{
-		char keyboard_input;
-		int ascii_code;
-		int dice_value;
 		for (int i = 0; i < NPlayers; i++)
 		{
-			cout << User[i].name << " " << "Press r to roll dice" << endl;
+			cout << User[i].name << " "
+				 << "Press r to roll dice" << endl;
 			cin >> keyboard_input;
 			ascii_code = (int)keyboard_input;
 			if (ascii_code == 82 || ascii_code == 114)
