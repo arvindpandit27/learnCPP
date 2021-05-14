@@ -18,7 +18,7 @@ int rolldice()
 	return dice_value;
 }
 
-int main()
+int main(int argc, char** argv)
 {
 	srand((unsigned)time(0));
 	int NPlayers;
@@ -45,6 +45,52 @@ int main()
 			<< " player colour" << endl;
 		cin >> name;
 		User[i].colourName = name;
+	}
+
+	sf::RenderWindow renderWindow(sf::VideoMode(800, 800), "Chowka Bhaara");
+
+	sf::Event event;
+
+	sf::CircleShape square(100, 4);
+	sf::RectangleShape sq(Vector2f{ 100,100 });
+	square.setRotation(45);
+
+
+	while (renderWindow.isOpen())
+	{
+		while (renderWindow.pollEvent(event)) {
+			if (event.type == sf::Event::EventType::Closed)
+				renderWindow.close();
+		}
+		renderWindow.clear();
+
+		for (int i = 0; i < 5; i++)
+		{
+			for (int j = 0; j < 5; j++)
+			{
+				if (((i % 2 == 0) && (j % 2 != 0)) || ((i % 2 != 0) && (j % 2 == 0))) {
+					sq.setFillColor(sf::Color(255, 0, 0));
+				}
+				else {
+					sq.setFillColor(sf::Color(0, 255, 255));
+				}
+
+				sq.setPosition({ (float)(100 * i + 100), (float)(100.0 * j + 100) });
+				renderWindow.draw(sq);
+
+				// renderwindow.draw(line ,2, sf::lines);
+			}
+		}
+		// line->a = 10;
+	   // renderWindow.draw(line, 2, sf::Lines); 
+		// renderWindow.draw(lines);//Chetan
+		 //circleShape.setPosition({ 0,500 });
+		 //renderWindow.draw(circleShape);
+		 //rectShape.setPosition({ 0,100 });
+		 //renderWindow.draw(rectShape);
+		 //renderWindow.draw(triangle);
+		 //renderWindow.draw(square);
+		renderWindow.display();
 	}
 
 	char keyboard_input;
