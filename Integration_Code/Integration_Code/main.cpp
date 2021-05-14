@@ -18,6 +18,8 @@ int rolldice()
 	return dice_value;
 }
 
+
+
 int main(int argc, char** argv)
 {
 	srand((unsigned)time(0));
