@@ -4,6 +4,19 @@
 
 
 Integration_Code/Integration_Code/Debug/
+
 Integration_Code/.vs/
+
+Integration_Code/.vs/slnx.sqlite
+
+Integration_Code/.vs/Integration_Code/v16/.suo
+
+Integration_Code/.vs/Integration_Code/v16/Browse.VC.db
+
+Integration_Code/Integration_Code/x64/
+
+Integration_Code/Integration_Code/x64/Debug
+
+Integration_Code/Integration_Code/x64/Debug/Integration_Code.tlog
 
 *.db
