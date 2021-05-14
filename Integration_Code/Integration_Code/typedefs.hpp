@@ -1,3 +1,4 @@
+#include <iostream>
 using namespace std;
 
 #define NCOINS  4
@@ -14,7 +15,6 @@ class Coins {
 public:
 	int x;
 	int y;
-	string colour;
 };
 
 class Player {

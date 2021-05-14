@@ -4,6 +4,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
+#include "CheckUserInputs.hpp"
 
 using namespace sf;
 
@@ -46,7 +47,14 @@ int main(int argc, char** argv)
 			<< " " << i + 1 << " "
 			<< " player colour" << endl;
 		cin >> name;
-		User[i].colourName = name;
+
+		if (CheckColorValidity(name, i, User)) {
+			User[i].colourName = name;
+		}
+		else {
+			cout << name << " has been picked already, please choose another color" << endl;
+		}
+
 	}
 
 	sf::RenderWindow renderWindow(sf::VideoMode(800, 800), "Chowka Bhaara");
