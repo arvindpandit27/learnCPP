@@ -71,10 +71,10 @@ int main(int argc, char** argv)
 			for (int j = 0; j < 5; j++)
 			{
 				if (((i % 2 == 0) && (j % 2 != 0)) || ((i % 2 != 0) && (j % 2 == 0))) {
-					sq.setFillColor(sf::Color(255, 0, 0));
+					sq.setFillColor(sf::Color(245, 222, 179));
 				}
 				else {
-					sq.setFillColor(sf::Color(0, 255, 255));
+					sq.setFillColor(sf::Color(218, 165,32));
 				}
 
 				sq.setPosition({ (float)(100 * i + 100), (float)(100.0 * j + 100) });
