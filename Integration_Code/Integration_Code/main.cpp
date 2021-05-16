@@ -48,13 +48,10 @@ int main(int argc, char** argv)
 			<< " player colour" << endl;
 		cin >> name;
 
-		if (CheckColorValidity(name, i, User)) {
-			User[i].colourName = name;
+		while (CheckColorValidity(name, i, User)) {
+			cin >> name;
 		}
-		else {
-			cout << name << " has been picked already, please choose another color" << endl;
-		}
-
+		User[i].colourName = name;
 	}
 
 	sf::RenderWindow renderWindow(sf::VideoMode(800, 800), "Chowka Bhaara");
