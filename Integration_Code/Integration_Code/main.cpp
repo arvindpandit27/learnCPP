@@ -11,10 +11,25 @@ using namespace sf;
 int rolldice()
 {
 	int dice_value;
-	dice_value = (rand() % 5) + 1;
-	if (dice_value == 5)
+	char keyboard_input;
+	int ascii_code;
+
+	cout << "Press r to roll dice" << endl;
+	cin >> keyboard_input;
+	ascii_code = (int)keyboard_input;
+
+	if (ascii_code == 82 || ascii_code == 114)
 	{
-		dice_value = 8;
+		dice_value = (rand() % 5) + 1;
+		if (dice_value == 5)
+		{
+			dice_value = 8;
+		}
+	}
+	else
+	{
+		cout << "r wasn't entered" << endl;
+		dice_value = 0;
 	}
 	return dice_value;
 }
@@ -100,35 +115,19 @@ int main(int argc, char** argv)
 		renderWindow.display();
 	}
 
-	char keyboard_input;
-	int ascii_code;
 	int dice_value;
 	while (1)
 	{
 		for (int i = 0; i < NPlayers; i++)
 		{
-			cout << User[i].name << " "
-				<< "Press r to roll dice" << endl;
-			cin >> keyboard_input;
-			ascii_code = (int)keyboard_input;
-			
-			if (ascii_code == 82 || ascii_code == 114)
-			{
+			cout << User[i].name << "'s turn" << endl;
+			do {
 				dice_value = rolldice();
-				if (dice_value == 4 || dice_value == 8)
-				{
-					User[i].Coin[0].x = 1;
-					User[i].Coin[0].y = 3;
-					cout << "CHOWKA BARA : You can move your pawn out of quarantine" << endl;
-				}
+				cout << dice_value << endl;
+				User[i].Coin[0].x = 1;
+				User[i].Coin[0].y = 3;
 				end_game = 0;
-			}
-			else
-			{
-				cout << "r wasn't entered" << endl;
-				end_game = 1;
-				break;
-			}
+			} while (dice_value == 4 || dice_value == 8 || dice_value == 0);
 		}
 		if (end_game == 1)
 		{
