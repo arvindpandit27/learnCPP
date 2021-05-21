@@ -75,8 +75,11 @@ int main(int argc, char** argv)
 
 	sf::CircleShape square(100, 4);
 	sf::RectangleShape sq(Vector2f{ 100,100 });
+	sf::RectangleShape rectangle1(sf::Vector2f(4, 100*sqrt(2))); // change the size to 100x100 rectangle.setSize(sf::Vector2f(100, 100));
+	sf::RectangleShape rectangle2(sf::Vector2f(4, 100 * sqrt(2)));
 	square.setRotation(45);
-
+	rectangle1.setRotation(-45);
+	rectangle2.setRotation(45);
 
 	while (renderWindow.isOpen())
 	{
@@ -90,18 +93,21 @@ int main(int argc, char** argv)
 		{
 			for (int j = 0; j < 5; j++)
 			{
-				if (((i % 2 == 0) && (j % 2 != 0)) || ((i % 2 != 0) && (j % 2 == 0))) {
-					sq.setFillColor(sf::Color(245, 222, 179));
-				}
-				else {
-					sq.setFillColor(sf::Color(218, 165,32));
-				}
-
-				sq.setPosition({ (float)(100 * i + 100), (float)(100.0 * j + 100) });
+				sq.setFillColor(sf::Color(192, 192, 192));
+				sq.setPosition({ (float)(105 * i + 100), (float)(105 * j + 100) });
 				renderWindow.draw(sq);
+				if  ( (i % 2 == 0 && j % 2 == 0 && (((i + j) == 2) || ((i + j) == 6 ))) || (i==2 && j==2))
+				{
+					rectangle1.setPosition({ (float)(105 * i + 100), (float)(105 * j + 100) });
+					rectangle1.setFillColor(sf::Color(0, 0, 0));
+					renderWindow.draw(rectangle1);
+					rectangle2.setPosition({ (float)(105 * i + 200), (float)(105 * j + 100) });
+					rectangle2.setFillColor(sf::Color(0, 0, 0));
+					renderWindow.draw(rectangle2);
+				}
 
-				// renderwindow.draw(line ,2, sf::lines);
 			}
+				// renderwindow.draw(line ,2, sf::lines);
 		}
 		// line->a = 10;
 	   // renderWindow.draw(line, 2, sf::Lines); 
