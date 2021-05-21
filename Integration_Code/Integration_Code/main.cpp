@@ -73,11 +73,9 @@ int main(int argc, char** argv)
 
 	sf::Event event;
 
-	sf::CircleShape square(100, 4);
 	sf::RectangleShape sq(Vector2f{ 100,100 });
 	sf::RectangleShape rectangle1(sf::Vector2f(4, 100*sqrt(2))); // change the size to 100x100 rectangle.setSize(sf::Vector2f(100, 100));
 	sf::RectangleShape rectangle2(sf::Vector2f(4, 100 * sqrt(2)));
-	square.setRotation(45);
 	rectangle1.setRotation(-45);
 	rectangle2.setRotation(45);
 
@@ -105,19 +103,8 @@ int main(int argc, char** argv)
 					rectangle2.setFillColor(sf::Color(0, 0, 0));
 					renderWindow.draw(rectangle2);
 				}
-
 			}
-				// renderwindow.draw(line ,2, sf::lines);
 		}
-		// line->a = 10;
-	   // renderWindow.draw(line, 2, sf::Lines); 
-		// renderWindow.draw(lines);//Chetan
-		 //circleShape.setPosition({ 0,500 });
-		 //renderWindow.draw(circleShape);
-		 //rectShape.setPosition({ 0,100 });
-		 //renderWindow.draw(rectShape);
-		 //renderWindow.draw(triangle);
-		 //renderWindow.draw(square);
 		renderWindow.display();
 	}
 
