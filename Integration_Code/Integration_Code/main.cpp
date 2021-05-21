@@ -54,7 +54,7 @@ int main(int argc, char** argv)
 	sf::Event event;
 
 	sf::CircleShape square(100, 4);
-	sf::RectangleShape sq(Vector2f{ 100,100 });
+	sf::RectangleShape sq(Vector2f{ 75,75 });
 	square.setRotation(45);
 
 
@@ -66,22 +66,15 @@ int main(int argc, char** argv)
 		}
 		renderWindow.clear();
 
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 7; i++)
 		{
-			for (int j = 0; j < 5; j++)
+			for (int j = 0; j < 7; j++)
 			{
-				if (((i % 2 == 0) && (j % 2 != 0)) || ((i % 2 != 0) && (j % 2 == 0))) {
-					sq.setFillColor(sf::Color(245, 222, 179));
-				}
-				else {
-					sq.setFillColor(sf::Color(218, 165,32));
-				}
-
-				sq.setPosition({ (float)(100 * i + 100), (float)(100.0 * j + 100) });
+				sq.setFillColor(sf::Color(192, 192, 192));
+				sq.setPosition({ (float)(77 * i + 100), (float)(77 * j + 100) });
 				renderWindow.draw(sq);
-
-				// renderwindow.draw(line ,2, sf::lines);
 			}
+				// renderwindow.draw(line ,2, sf::lines);
 		}
 		// line->a = 10;
 	   // renderWindow.draw(line, 2, sf::Lines); 
