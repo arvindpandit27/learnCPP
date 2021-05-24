@@ -11,7 +11,6 @@ using namespace std::literals::chrono_literals;
 
 char keyboard_input;
 int ascii_code;
-bool end_game;
 int NPlayers;
 Player* User;
 
@@ -47,32 +46,22 @@ void GamePlay() {
 	int dice_value;
 	while (!Finished)
 	{
-		cout << "CONSOLE UPDATE" << endl;
-		//for (int i = 0; i < NPlayers; i++)
-		//{
-		//	cout << User[i].name << "'s turn" << endl;
-		//	do {
-		//		dice_value = rolldice();
-		//		cout << dice_value << endl;
-		//		User[i].Coin[0].x = 1;
-		//		User[i].Coin[0].y = 3;
-		//		end_game = 0;
-		//	} while (dice_value == 4 || dice_value == 8 || dice_value == 0);
-		//}
-		//if (end_game == 1)
-		//{
-		//	break;
-		//}
+		for (int i = 0; i < NPlayers; i++)
+		{
+			cout << User[i].name << "'s turn" << endl;
+			do {
+				dice_value = rolldice();
+				cout << dice_value << endl;
+			} while (dice_value == 4 || dice_value == 8 || dice_value == 0);
+		}
 	}
 }
-
 
 int main(int argc, char** argv)
 {
 	srand((unsigned)time(0));
 	cout << "Enter number of players" << endl;
 	cin >> NPlayers;
-	Player* User;
 	User = new Player[NPlayers];
 	//Player User[NPlayers];
 	Player PlayerA;
