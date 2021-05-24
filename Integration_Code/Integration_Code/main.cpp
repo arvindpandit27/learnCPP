@@ -6,6 +6,7 @@
 #include "CheckUserInputs.hpp"
 #include <thread>
 #include "BoardGraphics.hpp"
+#include "Utils.hpp"
 
 using namespace std::literals::chrono_literals;
 
@@ -48,6 +49,7 @@ void GamePlay() {
 	while (!Finished)
 	{
 		cout << "CONSOLE UPDATE" << endl;
+		std::this_thread::sleep_for(2s);
 		//for (int i = 0; i < NPlayers; i++)
 		//{
 		//	cout << User[i].name << "'s turn" << endl;
@@ -69,6 +71,15 @@ void GamePlay() {
 
 int main(int argc, char** argv)
 {
+	int *coptr;
+	int coll_arr[2];
+	coptr = primeFactors(26);
+	cout << *coptr << endl;
+	//coll_arr[1] = *(coptr + 1);
+	//cout << coll_arr[0] << endl;
+	//cout << coll_arr[1] << endl;
+	//coll_arr[1] = ;
+
 	srand((unsigned)time(0));
 	cout << "Enter number of players" << endl;
 	cin >> NPlayers;
@@ -78,6 +89,8 @@ int main(int argc, char** argv)
 	Player PlayerA;
 	Coins Coin[4];
 	bool end_game;
+
+	
 
 	for (int i = 0; i < NPlayers; i++)
 	{
@@ -99,11 +112,11 @@ int main(int argc, char** argv)
 		User[i].colourName = name;
 	}
 
-	thread t1(BoardGraphics);
-	thread t2(GamePlay);
+	//thread t1(BoardGraphics);
+	//thread t2(GamePlay);
 
-	t1.join();
-	t2.join();
+	//t1.join();
+	//t2.join();
 
 	return 0;
 }
