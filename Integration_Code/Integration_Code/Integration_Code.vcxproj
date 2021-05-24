@@ -149,10 +149,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BoardGraphics.cpp" />
     <ClCompile Include="CheckUserInputs.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BoardGraphics.hpp" />
     <ClInclude Include="CheckUserInputs.hpp" />
     <ClInclude Include="typedefs.hpp" />
   </ItemGroup>

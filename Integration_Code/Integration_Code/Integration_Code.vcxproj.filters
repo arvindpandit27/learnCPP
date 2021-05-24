@@ -21,12 +21,18 @@
     <ClCompile Include="CheckUserInputs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BoardGraphics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="typedefs.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="CheckUserInputs.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BoardGraphics.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
