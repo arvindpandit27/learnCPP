@@ -2,6 +2,9 @@ using namespace std;
 
 #define NCOINS  4
 
+void BoardGraphics(void);
+void GamePlay();
+
 
 typedef enum {
 	RED = 0,
@@ -24,6 +27,8 @@ public:
 	Colour_t colour;
 	Coins Coin[4];
 };
+
+
 
 
 

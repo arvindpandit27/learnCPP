@@ -4,8 +4,20 @@
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
+#include <thread>
+
 
 using namespace sf;
+using namespace std::literals::chrono_literals;
+
+char keyboard_input;
+int ascii_code;
+int dice_value;
+bool end_game;
+int NPlayers;
+Player* User;
+
+static bool Finished = false;
 
 int rolldice()
 {
@@ -19,43 +31,14 @@ int rolldice()
 }
 
 
-
-int main(int argc, char** argv)
-{
-	srand((unsigned)time(0));
-	int NPlayers;
-	cout << "Enter number of players" << endl;
-	cin >> NPlayers;
-	Player* User;
-	User = new Player[NPlayers];
-	//Player User[NPlayers];
-	Player PlayerA;
-	Coins Coin[4];
-	bool end_game;
-
-	for (int i = 0; i < NPlayers; i++)
-	{
-		string name;
-		cout << "Enter"
-			<< " " << i + 1 << " "
-			<< "player's name" << endl;
-		cin >> name;
-		User[i].name = name;
-		cout << "Choose the color RED, BLUE, GREEN OR YELLOW" << endl;
-		cout << "Enter"
-			<< " " << i + 1 << " "
-			<< " player colour" << endl;
-		cin >> name;
-		User[i].colourName = name;
-	}
-
+void BoardGraphics() {
 	sf::RenderWindow renderWindow(sf::VideoMode(800, 800), "Chowka Bhaara");
 
 	sf::Event event;
 
 	sf::CircleShape square(100, 4);
 	sf::RectangleShape sq(Vector2f{ 100,100 });
-	sf::RectangleShape rectangle1(sf::Vector2f(4, 100*sqrt(2))); // change the size to 100x100 rectangle.setSize(sf::Vector2f(100, 100));
+	sf::RectangleShape rectangle1(sf::Vector2f(4, 100 * sqrt(2))); // change the size to 100x100 rectangle.setSize(sf::Vector2f(100, 100));
 	sf::RectangleShape rectangle2(sf::Vector2f(4, 100 * sqrt(2)));
 	square.setRotation(45);
 	rectangle1.setRotation(-45);
@@ -76,7 +59,7 @@ int main(int argc, char** argv)
 				sq.setFillColor(sf::Color(192, 192, 192));
 				sq.setPosition({ (float)(105 * i + 100), (float)(105 * j + 100) });
 				renderWindow.draw(sq);
-				if  ( (i % 2 == 0 && j % 2 == 0 && (((i + j) == 2) || ((i + j) == 6 ))) || (i==2 && j==2))
+				if ((i % 2 == 0 && j % 2 == 0 && (((i + j) == 2) || ((i + j) == 6))) || (i == 2 && j == 2))
 				{
 					rectangle1.setPosition({ (float)(105 * i + 100), (float)(105 * j + 100) });
 					rectangle1.setFillColor(sf::Color(0, 0, 0));
@@ -87,54 +70,82 @@ int main(int argc, char** argv)
 				}
 
 			}
-				// renderwindow.draw(line ,2, sf::lines);
+			// renderwindow.draw(line ,2, sf::lines);
 		}
-		// line->a = 10;
-	   // renderWindow.draw(line, 2, sf::Lines); 
-		// renderWindow.draw(lines);//Chetan
-		 //circleShape.setPosition({ 0,500 });
-		 //renderWindow.draw(circleShape);
-		 //rectShape.setPosition({ 0,100 });
-		 //renderWindow.draw(rectShape);
-		 //renderWindow.draw(triangle);
-		 //renderWindow.draw(square);
 		renderWindow.display();
 	}
+}
 
-	char keyboard_input;
-	int ascii_code;
-	int dice_value;
-	while (1)
+void GamePlay() {
+	while (!Finished)
 	{
-		for (int i = 0; i < NPlayers; i++)
-		{
-			cout << User[i].name << " "
-				<< "Press r to roll dice" << endl;
-			cin >> keyboard_input;
-			ascii_code = (int)keyboard_input;
-			
-			if (ascii_code == 82 || ascii_code == 114)
-			{
-				dice_value = rolldice();
-				if (dice_value == 4 || dice_value == 8)
-				{
-					User[i].Coin[0].x = 1;
-					User[i].Coin[0].y = 3;
-					cout << "CHOWKA BARA : You can move your pawn out of quarantine" << endl;
-				}
-				end_game = 0;
-			}
-			else
-			{
-				cout << "r wasn't entered" << endl;
-				end_game = 1;
-				break;
-			}
-		}
-		if (end_game == 1)
-		{
-			break;
-		}
+		cout << "Game play working..." << endl;
+		std::this_thread::sleep_for(1s);
+		//for (int i = 0; i < NPlayers; i++)
+		//{
+		//	cout << User[i].name << " "
+		//		<< "Press r to roll dice" << endl;
+		//	cin >> keyboard_input;
+		//	ascii_code = (int)keyboard_input;
+
+		//	if (ascii_code == 82 || ascii_code == 114)
+		//	{
+		//		dice_value = rolldice();
+		//		if (dice_value == 4 || dice_value == 8)
+		//		{
+		//			User[i].Coin[0].x = 1;
+		//			User[i].Coin[0].y = 3;
+		//			cout << "CHOWKA BARA : You can move your pawn out of quarantine" << endl;
+		//		}
+		//		end_game = 0;
+		//	}
+		//	else
+		//	{
+		//		cout << "r wasn't entered" << endl;
+		//		end_game = 1;
+		//		break;
+		//	}
+		//}
+		//if (end_game == 1)
+		//{
+		//	break;
+		//}
 	}
+}
+
+int main(int argc, char** argv)
+{
+
+	srand((unsigned)time(0));
+	cout << "Enter number of players" << endl;
+	cin >> NPlayers;
+	User = new Player[NPlayers];
+	Player PlayerA;
+	Coins Coin[4];
+
+	for (int i = 0; i < NPlayers; i++)
+	{
+		string name;
+		cout << "Enter"
+			<< " " << i + 1 << " "
+			<< "player's name" << endl;
+		cin >> name;
+		User[i].name = name;
+		cout << "Choose the color RED, BLUE, GREEN OR YELLOW" << endl;
+		cout << "Enter"
+			<< " " << i + 1 << " "
+			<< " player colour" << endl;
+		cin >> name;
+		User[i].colourName = name;
+	}
+
+	thread t1(BoardGraphics);
+	thread t2(GamePlay);
+
+
+	t1.join();
+	t2.join();
+
+
 	return 0;
 }
