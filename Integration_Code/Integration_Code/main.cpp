@@ -38,8 +38,8 @@ void BoardGraphics() {
 
 	sf::CircleShape square(100, 4);
 	sf::RectangleShape sq(Vector2f{ 100,100 });
-	sf::RectangleShape rectangle1(sf::Vector2f(4, 100 * sqrt(2))); // change the size to 100x100 rectangle.setSize(sf::Vector2f(100, 100));
-	sf::RectangleShape rectangle2(sf::Vector2f(4, 100 * sqrt(2)));
+	sf::RectangleShape rectangle1(sf::Vector2f(4, 100 * (float) sqrt(2))); // change the size to 100x100 rectangle.setSize(sf::Vector2f(100, 100));
+	sf::RectangleShape rectangle2(sf::Vector2f(4, 100 * (float) sqrt(2)));
 	square.setRotation(45);
 	rectangle1.setRotation(-45);
 	rectangle2.setRotation(45);
