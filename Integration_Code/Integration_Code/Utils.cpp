@@ -18,7 +18,7 @@ int * primeFactors(int n)
         // While i divides n, print i and divide n
         while (n % i == 0)
         {
-            cout << i << " ";
+           //cout << i << " ";
             if (collect[0] == 0) {
                 collect[0] = i;
             }
@@ -31,7 +31,7 @@ int * primeFactors(int n)
 
     if (n > 2)
         collect[1] = n;
-        cout << n << " ";
+       //cout << n << " ";
 
     return collect;
 }
