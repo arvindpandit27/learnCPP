@@ -47,21 +47,22 @@ void GamePlay() {
 	int dice_value;
 	while (!Finished)
 	{
-		for (int i = 0; i < NPlayers; i++)
-		{
-			cout << User[i].name << "'s turn" << endl;
-			do {
-				dice_value = rolldice();
-				cout << dice_value << endl;
-				User[i].Coin[0].x = 1;
-				User[i].Coin[0].y = 3;
-				end_game = 0;
-			} while (dice_value == 4 || dice_value == 8 || dice_value == 0);
-		}
-		if (end_game == 1)
-		{
-			break;
-		}
+		cout << "CONSOLE UPDATE" << endl;
+		//for (int i = 0; i < NPlayers; i++)
+		//{
+		//	cout << User[i].name << "'s turn" << endl;
+		//	do {
+		//		dice_value = rolldice();
+		//		cout << dice_value << endl;
+		//		User[i].Coin[0].x = 1;
+		//		User[i].Coin[0].y = 3;
+		//		end_game = 0;
+		//	} while (dice_value == 4 || dice_value == 8 || dice_value == 0);
+		//}
+		//if (end_game == 1)
+		//{
+		//	break;
+		//}
 	}
 }
 
