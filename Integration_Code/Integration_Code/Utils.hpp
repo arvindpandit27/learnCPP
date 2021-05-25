@@ -2,4 +2,4 @@
 #include <cmath>
 using namespace std;
 
-int * primeFactors(int);
+void primeFactors(int, int*);

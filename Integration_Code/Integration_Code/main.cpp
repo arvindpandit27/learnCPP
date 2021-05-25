@@ -73,15 +73,15 @@ int main(int argc, char** argv)
 {
 	int *coptr;
 	int coll_arr[3];
-	coptr = primeFactors(26);
-	cout << coptr << endl;
-	cout << (coptr + 1) << endl;
-	coll_arr[0] = *coptr;
-	coll_arr[1] = *(coptr + 1);
-	coll_arr[2] = *coptr;
+	primeFactors(26, coll_arr);
 	cout << coll_arr[0] << endl;
 	cout << coll_arr[1] << endl;
-	cout << coll_arr[2] << endl;
+	//coll_arr[0] = *coptr;
+	//coll_arr[1] = *(coptr + 1);
+	//coll_arr[2] = *coptr;
+	//cout << coll_arr[0] << endl;
+	//cout << coll_arr[1] << endl;
+	//cout << coll_arr[2] << endl;
 	//coll_arr[1] = ;
 
 	srand((unsigned)time(0));

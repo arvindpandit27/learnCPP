@@ -1,13 +1,12 @@
 #include "Utils.hpp"
 
 
-int * primeFactors(int n)
+void primeFactors(int n, int* coll_arr)
 {
-    int collect[2] = {};
     // Print the number of 2s that divide n
     while (n % 2 == 0)
     {
-        collect[0] = 2;
+        coll_arr[0] = 2;
         n = n / 2;
     }
 
@@ -19,19 +18,18 @@ int * primeFactors(int n)
         while (n % i == 0)
         {
            //cout << i << " ";
-            if (collect[0] == 0) {
-                collect[0] = i;
+            if (coll_arr[0] == 0) {
+                coll_arr[0] = i;
             }
             else {
-                collect[1] = i;
+                coll_arr[1] = i;
             }
             n = n / i;
         }
     }
 
     if (n > 2)
-        collect[1] = n;
-       //cout << n << " ";
+        coll_arr[1] = n;
 
-    return collect;
+
 }
