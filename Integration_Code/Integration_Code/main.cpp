@@ -125,11 +125,11 @@ int main(int argc, char** argv)
 		User[i].colourName = name;
 	}
 
-	//thread t1(BoardGraphics);
-	//thread t2(GamePlay);
+	thread t1(BoardGraphics);
+	thread t2(GamePlay);
 
-	//t1.join();
-	//t2.join();
+	t1.join();
+	t2.join();
 
 	return 0;
 }
