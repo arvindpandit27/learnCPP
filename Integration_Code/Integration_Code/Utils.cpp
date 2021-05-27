@@ -1,5 +1,8 @@
 #include "Utils.hpp"
+#include <algorithm>
 
+int board_rows[5] = { 2,3,5,7,11 };
+int board_cols[5] = { 13,17,19,23,29 };
 
 void primeFactors(int n, int* coll_arr)
 {
@@ -32,4 +35,28 @@ void primeFactors(int n, int* coll_arr)
         coll_arr[1] = n;
 
 
+}
+
+void findXYinBoard(int prime1, int prime2, int* indices) {
+    int i = 0;
+    while (i < 5)
+    {
+        if (board_rows[i] == prime1) {
+            break;
+        }
+        i++;
+    }
+
+    indices[0] = i;
+
+    int j = 0;
+    while (j < 5)
+    {
+        if (board_cols[j] == prime2) {
+            break;
+        }
+        j++;
+    }
+
+    indices[1] = j;
 }

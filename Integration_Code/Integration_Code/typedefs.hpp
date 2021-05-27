@@ -13,8 +13,7 @@ typedef enum {
 
 class Coins {
 public:
-	int x;
-	int y;
+	int Position;
 };
 
 class Player {

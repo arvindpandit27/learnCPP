@@ -71,11 +71,24 @@ void GamePlay() {
 
 int main(int argc, char** argv)
 {
+
+
+	srand((unsigned)time(0));
+	cout << "Enter number of players" << endl;
+	cin >> NPlayers;
+	Player* User;
+	User = new Player[NPlayers];
+	User->Coin[0].Position = 26;
+
 	int *coptr;
-	int coll_arr[3];
-	primeFactors(26, coll_arr);
+	int coll_arr[3] = {0};
+	int index[2];
+	primeFactors(User->Coin[0].Position, coll_arr);
 	cout << coll_arr[0] << endl;
 	cout << coll_arr[1] << endl;
+	findXYinBoard(coll_arr[0], coll_arr[1], index);
+	cout << "row is" << index[0] << endl;
+	cout << "column is" << index[1] << endl;
 	//coll_arr[0] = *coptr;
 	//coll_arr[1] = *(coptr + 1);
 	//coll_arr[2] = *coptr;
@@ -84,11 +97,7 @@ int main(int argc, char** argv)
 	//cout << coll_arr[2] << endl;
 	//coll_arr[1] = ;
 
-	srand((unsigned)time(0));
-	cout << "Enter number of players" << endl;
-	cin >> NPlayers;
-	Player* User;
-	User = new Player[NPlayers];
+
 	//Player User[NPlayers];
 	Player PlayerA;
 	Coins Coin[4];

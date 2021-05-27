@@ -3,3 +3,5 @@
 using namespace std;
 
 void primeFactors(int, int*);
+
+void findXYinBoard(int, int, int*);
