@@ -15,15 +15,17 @@ int ascii_code;
 int NPlayers;
 Player* User;
 
-static bool Finished = false;
+bool Finished = false;
 
 int Paths[4][25] = { {46,58,62,93,155,217,341,319,253,187,143,91,65,39,26,34,51,85,119,161,203,145,87,69,115},
 	{253,187,143,91,65,39,26,34,46,58,62,93,155,217,341,319,203,145,87,69,51,85,119,161,115},
 	{65,39,26,34,46,58,62,93,155,217,341,319,253,187,143,91,119,161,203,145,87,69,51,85,115},
-	{155,217,341,319,253,187,143,91,65,39,26,34,46,58,62,93,87,69,51,85,119,161,203,145,115}};
+	{155,217,341,319,253,187,143,91,65,39,26,34,46,58,62,93,87,69,51,85,119,161,203,145,115} };
 
 int rolldice()
 {
+	srand(time(NULL));
+
 	int dice_value;
 	char keyboard_input;
 	int ascii_code;
@@ -48,35 +50,51 @@ int rolldice()
 	return dice_value;
 }
 
-int MoveCoin(int Selected_Coin, int dice_value,int player_number) {
+int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 	int current_position_index = 0;
+	int new_position_index = 0;
+	int board_position = 0;
+
+	board_position = User[player_number].Coin[Selected_Coin].Position;
 	for (int n = 0; n < 25; n++) {
-		if (User[player_number].Coin[Selected_Coin].Position == Paths[player_number][n]) {
+		if (board_position == Paths[player_number][n]) {
 			current_position_index = n;
 			break;
 		}
 	}
-	if ((current_position_index + dice_value) > 24) {
+
+	new_position_index = current_position_index + dice_value;
+	if (new_position_index > 24) {
 		cout << "Cannot Reach Centre" << endl;
-		return User[player_number].Coin[Selected_Coin].Position;
 	}
 	else {
-		User[player_number].Coin[Selected_Coin].Position = Paths[player_number][current_position_index + dice_value];
-		return User[player_number].Coin[Selected_Coin].Position;
+		board_position = Paths[player_number][new_position_index];
+		if (board_position != Paths[0][0] && board_position != Paths[1][0] && board_position != Paths[2][0] && board_position != Paths[3][0]) {
+			for (int n = 0; n < NPlayers; n++) {
+				cout << User[n].Coin[Selected_Coin].Position << endl;
+				if (n != player_number && board_position == User[n].Coin[Selected_Coin].Position) {
+					User[n].Coin[Selected_Coin].Position = Paths[n][0];
+					cout << User[n].name << "'s Coin Was Killed" << endl;
+				}
+			}
+		}
+		User[player_number].Coin[Selected_Coin].Position = board_position;
 	}
+	return board_position;
 }
-	
+
 
 void GamePlay() {
 	int dice_value;
 	int selected_coin;
 	int board_position = 0;
 
+	// Initialize Coin Positions
 	for (int n = 0; n < 4; n++) {
-		User[0].Coin[n].Position = 46;
-		User[1].Coin[n].Position = 253;
-		User[2].Coin[n].Position = 65;
-		User[2].Coin[n].Position = 155;
+		User[0].Coin[n].Position = Paths[0][0];
+		User[1].Coin[n].Position = Paths[1][0];
+		User[2].Coin[n].Position = Paths[2][0];
+		User[3].Coin[n].Position = Paths[3][0];
 	}
 	while (!Finished)
 	{
@@ -87,7 +105,7 @@ void GamePlay() {
 				dice_value = rolldice();
 				cout << dice_value << endl;
 				selected_coin = CoinSelect();
-				board_position = MoveCoin(selected_coin, dice_value,i);
+				board_position = MoveCoin(selected_coin, dice_value, i);
 				cout << board_position << endl;
 				if (board_position == 115) {
 					cout << User[i].name << " is the Winner" << endl;
@@ -101,7 +119,6 @@ void GamePlay() {
 
 int main(int argc, char** argv)
 {
-	srand((unsigned)time(0));
 	cout << "Enter number of players" << endl;
 	cin >> NPlayers;
 	User = new Player[NPlayers];
