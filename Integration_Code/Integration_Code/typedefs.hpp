@@ -3,7 +3,6 @@ using namespace std;
 
 #define NCOINS  4
 
-
 typedef enum {
 	RED = 0,
 	BLUE = 1,
@@ -13,8 +12,7 @@ typedef enum {
 
 class Coins {
 public:
-	int x;
-	int y;
+	int Position;
 };
 
 class Player {
