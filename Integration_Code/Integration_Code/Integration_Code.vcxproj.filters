@@ -25,6 +25,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="UserInput.cpp">
+    <ClCompile Include="Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -39,6 +40,7 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="UserInput.hpp">
+    <ClInclude Include="Utils.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

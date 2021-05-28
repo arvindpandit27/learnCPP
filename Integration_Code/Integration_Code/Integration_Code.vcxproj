@@ -153,12 +153,14 @@
     <ClCompile Include="CheckUserInputs.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="UserInput.cpp" />
+    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoardGraphics.hpp" />
     <ClInclude Include="CheckUserInputs.hpp" />
     <ClInclude Include="typedefs.hpp" />
     <ClInclude Include="UserInput.hpp" />
+    <ClInclude Include="Utils.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
