@@ -18,10 +18,10 @@ Player* User;
 
 bool Finished = false;
 
-int Paths[4][25] = { {46,58,62,93,155,217,341,319,253,187,143,91,65,39,26,34,51,85,119,161,203,145,87,69,115},
-	{253,187,143,91,65,39,26,34,46,58,62,93,155,217,341,319,203,145,87,69,51,85,119,161,115},
-	{65,39,26,34,46,58,62,93,155,217,341,319,253,187,143,91,119,161,203,145,87,69,51,85,115},
-	{155,217,341,319,253,187,143,91,65,39,26,34,46,58,62,93,87,69,51,85,119,161,203,145,115} };
+int Paths[4][25] = { {38,46,58,87,145,203,319,253,209,187,143,91,65,39,26,34,51,85,119,133,161,115,69,57,95},
+	{209,187,143,91,65,39,26,34,38,46,58,87,145,203,319,253,161,115,69,57,51,85,119,133,95},
+	{65,39,26,34,38,46,58,87,145,203,319,253,209,187,143,91,119,133,161,115,69,57,51,85,95},
+	{145,203,319,253,209,187,143,91,65,39,26,34,38,46,58,87,69,57,51,85,119,133,161,115,95} };
 
 int rolldice()
 {
@@ -72,7 +72,7 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 		board_position = Paths[player_number][new_position_index];
 		if (board_position != Paths[0][0] && board_position != Paths[1][0] && board_position != Paths[2][0] && board_position != Paths[3][0]) {
 			for (int n = 0; n < NPlayers; n++) {
-				cout << User[n].Coin[Selected_Coin].Position << endl;
+				//cout << User[n].Coin[Selected_Coin].Position << endl;
 				if (n != player_number && board_position == User[n].Coin[Selected_Coin].Position) {
 					User[n].Coin[Selected_Coin].Position = Paths[n][0];
 					cout << User[n].name << "'s Coin Was Killed" << endl;
@@ -104,10 +104,19 @@ void GamePlay() {
 			cout << User[i].name << "'s turn" << endl;
 			do {
 				dice_value = rolldice();
-				cout << dice_value << endl;
 				selected_coin = CoinSelect();
 				board_position = MoveCoin(selected_coin, dice_value, i);
-				cout << board_position << endl;
+				User[i].Coin[0].Position = board_position;
+
+				int coll_arr[2] = { 0 };
+				primeFactors(User[i].Coin[0].Position, coll_arr);
+				cout << coll_arr[0] << endl;
+				cout << coll_arr[1] << endl;
+				int index[2] = { 0 };
+				findXYinBoard(coll_arr[0], coll_arr[1], index);
+				User[i].Coin[0].xPos = index[0];
+				User[i].Coin[0].yPos = index[1];
+
 				if (board_position == 115) {
 					cout << User[i].name << " is the Winner" << endl;
 					Finished = true;
@@ -120,19 +129,9 @@ void GamePlay() {
 
 int main(int argc, char** argv)
 {
-
-
 	cout << "Enter number of players" << endl;
 	cin >> NPlayers;
 	User = new Player[NPlayers];
-	User[0].Coin[0].Position = 46;
-
-	int coll_arr[3] = {0};
-	primeFactors(User->Coin[0].Position, coll_arr);
-	cout << coll_arr[0] << endl;
-	cout << coll_arr[1] << endl;
-	findXYinBoard(coll_arr[0], coll_arr[1]);
-
 
 	for (int i = 0; i < NPlayers; i++)
 	{

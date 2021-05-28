@@ -2,8 +2,8 @@
 #include <algorithm>
 
 
-int board_rows[5] = { 2,3,5,7,11 };
-int board_cols[5] = { 13,17,19,23,29 };
+int board_rows[5] = { 13,17,19,23,29 };
+int board_cols[5] = { 2,3,5,7,11 };
 
 void primeFactors(int n, int* coll_arr)
 {
@@ -38,7 +38,7 @@ void primeFactors(int n, int* coll_arr)
 
 }
 
-void findXYinBoard(int prime1, int prime2) {
+void findXYinBoard(int prime2, int prime1, int *indices) {
     int i = 0;
     while (i < 5)
     {
@@ -48,7 +48,7 @@ void findXYinBoard(int prime1, int prime2) {
         i++;
     }
 
-    //indices[0] = i;
+    indices[0] = i;
 
     int j = 0;
     while (j < 5)
@@ -59,5 +59,5 @@ void findXYinBoard(int prime1, int prime2) {
         j++;
     }
 
-    //indices[1] = j;
+    indices[1] = j;
 }

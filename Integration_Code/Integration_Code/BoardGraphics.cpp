@@ -75,10 +75,6 @@ void BoardGraphics() {
 					rectangle2.setPosition({ (float)(105 * i + 200), (float)(105 * j + 100) });
 					rectangle2.setFillColor(sf::Color(255,215, 0));
 					renderWindow.draw(rectangle2);
-
-
-
-
 				}
 
 			}
