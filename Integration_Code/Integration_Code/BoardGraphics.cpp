@@ -9,7 +9,7 @@ sf::RenderWindow renderWindow(sf::VideoMode(800, 800), "Chowka Bhaara");
 void init_coin_position(CircleShape triangle, RenderWindow* renderWindow)
 {
 	triangle.setFillColor(sf::Color(255, 0, 0));
-	triangle.setPosition({ (float)(105 * 2 + 100), (float)(105 * 0 + 100) });
+	triangle.setPosition({ (float)(105 * 2 + 105), (float)(105 * 0 + 105) });
 	//triangle.setOutlineThickness(2);
 	//triangle.setFillColor(sf::Color(0,255,0));
 	renderWindow->draw(triangle);
@@ -17,8 +17,8 @@ void init_coin_position(CircleShape triangle, RenderWindow* renderWindow)
 
 void coin_position_move(CircleShape triangle, RenderWindow* renderWindow, float row_value, float column_value)
 {
-	triangle.setFillColor(sf::Color(255, 0, 0));
-	triangle.setPosition({ (float)(105 * column_value + 100), (float)(105 * row_value + 100) });
+	triangle.setFillColor(sf::Color(245, 245, 220));
+	triangle.setPosition({ (float)(105 * column_value + 137.5), (float)(105 * row_value + 137.5) });
 	//triangle.setOutlineThickness(2);
 	//triangle.setFillColor(sf::Color(0,255,0))
 	renderWindow->draw(triangle);
@@ -33,7 +33,7 @@ void BoardGraphics(Player User[]) {
 	sf::RectangleShape sq(Vector2f{ 100,100 });
 	sf::RectangleShape rectangle1(sf::Vector2f(4, 100 * (float)sqrt(2))); // change the size to 100x100 rectangle.setSize(sf::Vector2f(100, 100));
 	sf::RectangleShape rectangle2(sf::Vector2f(4, 100 * (float)sqrt(2)));
-	sf::CircleShape triangle(30, 3);
+	sf::CircleShape triangle(15, 3);
 
 	
 

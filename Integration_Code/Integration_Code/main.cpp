@@ -48,7 +48,7 @@ int rolldice()
 		cout << "r wasn't entered" << endl;
 		dice_value = 0;
 	}
-	return dice_value;
+	return 2;
 }
 
 int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
