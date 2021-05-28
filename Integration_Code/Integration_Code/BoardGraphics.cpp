@@ -29,16 +29,11 @@ void BoardGraphics(Player User[]) {
 	sf::RenderWindow renderWindow(sf::VideoMode(800, 800), "Chowka Bhaara");
 	sf::Event event;
 
-	//sf::CircleShape square(100, 4);
 	sf::RectangleShape sq(Vector2f{ 100,100 });
 	sf::RectangleShape rectangle1(sf::Vector2f(4, 100 * (float)sqrt(2))); // change the size to 100x100 rectangle.setSize(sf::Vector2f(100, 100));
 	sf::RectangleShape rectangle2(sf::Vector2f(4, 100 * (float)sqrt(2)));
 	sf::CircleShape triangle(15, 3);
 
-	
-
-	//sf::RectangleShape sq(Vector2f{ 100,100 });
-	//square.setRotation(45);
 	rectangle1.setRotation(-45);
 	rectangle2.setRotation(45);
 
@@ -82,13 +77,6 @@ void BoardGraphics(Player User[]) {
 			// renderwindow.draw(line ,2, sf::lines);
 		}
 
-		//float row_value, column_value;
-		//cout << "enter row value" << endl;
-		//cin >> row_value;
-		//cout << "enter column value" << endl;
-		//cin >> column_value;
-		//triangle.setPosition({ (float)(105 * column_value + 100), (float)(105 * row_value + 100) });
-		////renderWindow.draw(triangle);
 		coin_position_move( triangle, &renderWindow, User[0].Coin[0].xPos, User[0].Coin[0].yPos);
 		renderWindow.display();
 	}
