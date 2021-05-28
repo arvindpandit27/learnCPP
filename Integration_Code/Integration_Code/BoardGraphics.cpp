@@ -40,7 +40,6 @@ void BoardGraphics() {
 	//square.setRotation(45);
 	rectangle1.setRotation(-45);
 	rectangle2.setRotation(45);
-	rectangleCoin.setRotation(45);
 
 	while (renderWindow.isOpen())
 	{

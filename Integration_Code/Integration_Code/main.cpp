@@ -7,6 +7,7 @@
 #include <thread>
 #include "BoardGraphics.hpp"
 #include "UserInput.hpp"
+#include "Utils.hpp"
 
 using namespace std::literals::chrono_literals;
 
@@ -124,7 +125,7 @@ int main(int argc, char** argv)
 	cout << "Enter number of players" << endl;
 	cin >> NPlayers;
 	User = new Player[NPlayers];
-	User->Coin[0].Position = 26;
+	User[0].Coin[0].Position = 26;
 
 	int *coptr;
 	int coll_arr[3] = {0};
