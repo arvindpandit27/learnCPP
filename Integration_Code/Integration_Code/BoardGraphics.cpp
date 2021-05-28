@@ -8,7 +8,7 @@ using namespace std;
 void init_coin_position(CircleShape triangle, RenderWindow* renderWindow)
 {
 	triangle.setFillColor(sf::Color(255, 0, 0));
-	triangle.setPosition({ (float)(105 * 0 + 100), (float)(105 * 2 + 100) });
+	triangle.setPosition({ (float)(105 * 2 + 100), (float)(105 * 0 + 100) });
 	//triangle.setOutlineThickness(2);
 	//triangle.setFillColor(sf::Color(0,255,0));
 	renderWindow->draw(triangle);
@@ -88,7 +88,7 @@ void BoardGraphics() {
 		//cin >> column_value;
 		//triangle.setPosition({ (float)(105 * column_value + 100), (float)(105 * row_value + 100) });
 		////renderWindow.draw(triangle);
-
+		coin_position_move( triangle, &renderWindow, 2.0f, 3.0f);
 		renderWindow.display();
 	}
 }
