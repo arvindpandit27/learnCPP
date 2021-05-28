@@ -1,10 +1,11 @@
 #include <SFML/Graphics.hpp.>
 #include <iostream>
+#include "typedefs.hpp"
 
 using namespace sf;
 using namespace std;
 
-
+sf::RenderWindow renderWindow(sf::VideoMode(800, 800), "Chowka Bhaara");
 void init_coin_position(CircleShape triangle, RenderWindow* renderWindow)
 {
 	triangle.setFillColor(sf::Color(255, 0, 0));
@@ -23,7 +24,7 @@ void coin_position_move(CircleShape triangle, RenderWindow* renderWindow, float 
 	renderWindow->draw(triangle);
 }
 
-void BoardGraphics() {
+void BoardGraphics(Player User[]) {
 	
 	sf::RenderWindow renderWindow(sf::VideoMode(800, 800), "Chowka Bhaara");
 	sf::Event event;
@@ -88,7 +89,7 @@ void BoardGraphics() {
 		//cin >> column_value;
 		//triangle.setPosition({ (float)(105 * column_value + 100), (float)(105 * row_value + 100) });
 		////renderWindow.draw(triangle);
-		coin_position_move( triangle, &renderWindow, 2.0f, 3.0f);
+		coin_position_move( triangle, &renderWindow, User[0].Coin[0].xPos, User[0].Coin[0].yPos);
 		renderWindow.display();
 	}
 }

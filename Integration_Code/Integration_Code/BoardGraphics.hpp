@@ -1,3 +1,3 @@
 #pragma once
 
-void BoardGraphics();
+void BoardGraphics(Player User[]);

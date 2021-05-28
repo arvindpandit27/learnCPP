@@ -117,7 +117,7 @@ void GamePlay() {
 				User[i].Coin[0].xPos = index[0];
 				User[i].Coin[0].yPos = index[1];
 
-				if (board_position == 115) {
+				if (board_position == 95) {
 					cout << User[i].name << " is the Winner" << endl;
 					Finished = true;
 					break;
@@ -153,7 +153,7 @@ int main(int argc, char** argv)
 		User[i].colourName = name;
 	}
 
-	thread t1(BoardGraphics);
+	thread t1(BoardGraphics,User);
 	thread t2(GamePlay);
 
 	t1.join();
