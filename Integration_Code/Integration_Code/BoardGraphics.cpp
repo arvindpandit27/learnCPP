@@ -1,6 +1,9 @@
 #include <SFML/Graphics.hpp.>
+#include <iostream>
 
 using namespace sf;
+using namespace std;
+
 
 void BoardGraphics() {
 	sf::RenderWindow renderWindow(sf::VideoMode(800, 800), "Chowka Bhaara");
@@ -35,8 +38,8 @@ void BoardGraphics() {
 				sq.setOutlineThickness(5);
 				sq.setOutlineColor(sf::Color(255, 215, 0));
 
-				triangle.setFillColor(sf::Color(255,0,0));
-				triangle.setPosition({ (float)(100), (float)(100) });
+				triangle.setFillColor(sf::Color(255, 0, 0));
+				triangle.setPosition({ (float)(105 * 2.25 + 100), (float)(105 * 0 + 100) });
 				//triangle.setOutlineThickness(2);
 				//triangle.setFillColor(sf::Color(0,255,0));
 				renderWindow.draw(triangle);
@@ -55,6 +58,15 @@ void BoardGraphics() {
 			}
 			// renderwindow.draw(line ,2, sf::lines);
 		}
+
+		float row_value, column_value;
+		cout << "enter row value" << endl;
+		cin >> row_value;
+		cout << "enter column value" << endl;
+		cin >> column_value;
+		triangle.setPosition({ (float)(105 * column_value + 100), (float)(105 * row_value + 100) });
+		renderWindow.draw(triangle);
+
 		renderWindow.display();
 	}
 }
