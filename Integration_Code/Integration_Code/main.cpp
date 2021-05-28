@@ -104,10 +104,19 @@ void GamePlay() {
 			cout << User[i].name << "'s turn" << endl;
 			do {
 				dice_value = rolldice();
-				cout << dice_value << endl;
 				selected_coin = CoinSelect();
 				board_position = MoveCoin(selected_coin, dice_value, i);
 				cout << board_position << endl;
+				User[i].Coin[0].Position = board_position;
+				int coll_arr[3] = { 0 };
+				primeFactors(User[i].Coin[0].Position, coll_arr);
+				cout << coll_arr[0] << endl;
+				cout << coll_arr[1] << endl;
+				//findXYinBoard(coll_arr[0], coll_arr[1]);
+
+
+
+
 				if (board_position == 115) {
 					cout << User[i].name << " is the Winner" << endl;
 					Finished = true;
@@ -125,15 +134,7 @@ int main(int argc, char** argv)
 	cout << "Enter number of players" << endl;
 	cin >> NPlayers;
 	User = new Player[NPlayers];
-	User[0].Coin[0].Position = 46;
-
-	int coll_arr[3] = {0};
-	primeFactors(User->Coin[0].Position, coll_arr);
-	cout << coll_arr[0] << endl;
-	cout << coll_arr[1] << endl;
-	findXYinBoard(coll_arr[0], coll_arr[1]);
-
-
+	
 	for (int i = 0; i < NPlayers; i++)
 	{
 		string name;
