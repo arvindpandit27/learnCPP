@@ -5,7 +5,7 @@
 using namespace sf;
 using namespace std;
 
-sf::RenderWindow renderWindow(sf::VideoMode(800, 800), "Chowka Bhaara");
+RenderWindow renderWindow(VideoMode(800, 800), "Chowka Bhaara");
 void init_coin_position(CircleShape triangle, RenderWindow* renderWindow)
 {
 	triangle.setFillColor(sf::Color(255, 0, 0));
@@ -25,22 +25,22 @@ void coin_position_move(CircleShape triangle, RenderWindow* renderWindow, float 
 
 void BoardGraphics(Player User[], int NPlayers) {
 	
-	sf::RenderWindow renderWindow(sf::VideoMode(800, 800), "Chowka Bhaara");
-	sf::Event event;
+	RenderWindow renderWindow(VideoMode(800, 800), "Chowka Bhaara");
+	Event event;
 
-	sf::RectangleShape sq(Vector2f{ 100,100 });
-	sf::RectangleShape rectangle1(sf::Vector2f(4, 100 * (float)sqrt(2))); // change the size to 100x100 rectangle.setSize(sf::Vector2f(100, 100));
-	sf::RectangleShape rectangle2(sf::Vector2f(4, 100 * (float)sqrt(2)));
+	RectangleShape sq(Vector2f{ 100,100 });
+	RectangleShape rectangle1(Vector2f(4, 100 * (float)sqrt(2))); // change the size to 100x100 rectangle.setSize(sf::Vector2f(100, 100));
+	RectangleShape rectangle2(Vector2f(4, 100 * (float)sqrt(2)));
 
 	// Initialize triangles
-	sf::CircleShape triangle1(15, 3);
-	triangle1.setFillColor(sf::Color(255, 0, 0));
-	sf::CircleShape triangle2(15, 3);
-	triangle2.setFillColor(sf::Color(0, 0, 255));
-	sf::CircleShape triangle3(15, 3);
-	triangle3.setFillColor(sf::Color(0, 255, 0));
-	sf::CircleShape triangle4(15, 3);
-	triangle4.setFillColor(sf::Color(255, 255, 0));
+	CircleShape* Triangle;
+	Triangle = new CircleShape[NPlayers];
+	int ColorMatrix[4][3] = { {255,0,0},{0,0,255},{0,255,0},{255,255,0} };
+	for (int n = 0; n < NPlayers; n++) {
+		Triangle[n].setPointCount(3);
+		Triangle[n].setRadius(15);
+		Triangle[n].setFillColor(Color(ColorMatrix[n][0], ColorMatrix[n][1], ColorMatrix[n][2]));
+	}
 
 	rectangle1.setRotation(-45);
 	rectangle2.setRotation(45);
@@ -85,10 +85,9 @@ void BoardGraphics(Player User[], int NPlayers) {
 			// renderwindow.draw(line ,2, sf::lines);
 		}
 
-		coin_position_move(triangle1, &renderWindow, User[0].Coin[0].xPos, User[0].Coin[0].yPos);
-		coin_position_move(triangle2, &renderWindow, User[1].Coin[0].xPos, User[1].Coin[0].yPos);
-		coin_position_move(triangle3, &renderWindow, User[2].Coin[0].xPos, User[2].Coin[0].yPos);
-		coin_position_move(triangle4, &renderWindow, User[3].Coin[0].xPos, User[3].Coin[0].yPos);
+		for (int n = 0; n < NPlayers; n++) {
+			coin_position_move(Triangle[n], &renderWindow, User[n].Coin[0].xPos, User[n].Coin[0].yPos);
+		}
 		renderWindow.display();
 	}
 }

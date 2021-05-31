@@ -95,6 +95,14 @@ void GamePlay() {
 		User[1].Coin[n].Position = Paths[1][0];
 		User[2].Coin[n].Position = Paths[2][0];
 		User[3].Coin[n].Position = Paths[3][0];
+		User[0].Coin[n].xPos = 2;
+		User[0].Coin[n].yPos = 0;
+		User[1].Coin[n].xPos = 2;
+		User[1].Coin[n].yPos = 4;
+		User[2].Coin[n].xPos = 0;
+		User[2].Coin[n].yPos = 2;
+		User[3].Coin[n].xPos = 4;
+		User[3].Coin[n].yPos = 2;
 	}
 	while (!Finished)
 	{
