@@ -17,7 +17,6 @@ void init_coin_position(CircleShape triangle, RenderWindow* renderWindow)
 
 void coin_position_move(CircleShape triangle, RenderWindow* renderWindow, float row_value, float column_value)
 {
-	triangle.setFillColor(sf::Color(245, 245, 220));
 	triangle.setPosition({ (float)(105 * column_value + 137.5), (float)(105 * row_value + 137.5) });
 	//triangle.setOutlineThickness(2);
 	//triangle.setFillColor(sf::Color(0,255,0))
@@ -32,7 +31,16 @@ void BoardGraphics(Player User[]) {
 	sf::RectangleShape sq(Vector2f{ 100,100 });
 	sf::RectangleShape rectangle1(sf::Vector2f(4, 100 * (float)sqrt(2))); // change the size to 100x100 rectangle.setSize(sf::Vector2f(100, 100));
 	sf::RectangleShape rectangle2(sf::Vector2f(4, 100 * (float)sqrt(2)));
-	sf::CircleShape triangle(15, 3);
+
+	// Initialize triangles
+	sf::CircleShape triangle1(15, 3);
+	triangle1.setFillColor(sf::Color(255, 0, 0));
+	sf::CircleShape triangle2(15, 3);
+	triangle2.setFillColor(sf::Color(0, 0, 255));
+	sf::CircleShape triangle3(15, 3);
+	triangle3.setFillColor(sf::Color(0, 255, 0));
+	sf::CircleShape triangle4(15, 3);
+	triangle4.setFillColor(sf::Color(255, 255, 0));
 
 	rectangle1.setRotation(-45);
 	rectangle2.setRotation(45);
@@ -77,7 +85,10 @@ void BoardGraphics(Player User[]) {
 			// renderwindow.draw(line ,2, sf::lines);
 		}
 
-		coin_position_move( triangle, &renderWindow, User[0].Coin[0].xPos, User[0].Coin[0].yPos);
+		coin_position_move(triangle1, &renderWindow, User[0].Coin[0].xPos, User[1].Coin[0].yPos);
+		coin_position_move(triangle2, &renderWindow, User[1].Coin[0].xPos, User[0].Coin[0].yPos);
+		coin_position_move(triangle3, &renderWindow, User[2].Coin[0].xPos, User[2].Coin[0].yPos);
+		coin_position_move(triangle4, &renderWindow, User[3].Coin[0].xPos, User[3].Coin[0].yPos);
 		renderWindow.display();
 	}
 }

@@ -123,6 +123,8 @@ void GamePlay() {
 					break;
 				}
 			} while (dice_value == 4 || dice_value == 8 || dice_value == 0);
+			if (Finished == true)
+				break;
 		}
 	}
 }
