@@ -23,7 +23,7 @@ void coin_position_move(CircleShape triangle, RenderWindow* renderWindow, float 
 	renderWindow->draw(triangle);
 }
 
-void BoardGraphics(Player User[]) {
+void BoardGraphics(Player User[], int NPlayers) {
 	
 	sf::RenderWindow renderWindow(sf::VideoMode(800, 800), "Chowka Bhaara");
 	sf::Event event;
@@ -85,8 +85,8 @@ void BoardGraphics(Player User[]) {
 			// renderwindow.draw(line ,2, sf::lines);
 		}
 
-		coin_position_move(triangle1, &renderWindow, User[0].Coin[0].xPos, User[1].Coin[0].yPos);
-		coin_position_move(triangle2, &renderWindow, User[1].Coin[0].xPos, User[0].Coin[0].yPos);
+		coin_position_move(triangle1, &renderWindow, User[0].Coin[0].xPos, User[0].Coin[0].yPos);
+		coin_position_move(triangle2, &renderWindow, User[1].Coin[0].xPos, User[1].Coin[0].yPos);
 		coin_position_move(triangle3, &renderWindow, User[2].Coin[0].xPos, User[2].Coin[0].yPos);
 		coin_position_move(triangle4, &renderWindow, User[3].Coin[0].xPos, User[3].Coin[0].yPos);
 		renderWindow.display();

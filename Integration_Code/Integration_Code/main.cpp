@@ -88,7 +88,6 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 void GamePlay() {
 	int dice_value;
 	int selected_coin;
-	int board_position = 0;
 
 	// Initialize Coin Positions
 	for (int n = 0; n < 4; n++) {
@@ -105,19 +104,16 @@ void GamePlay() {
 			do {
 				dice_value = rolldice();
 				selected_coin = CoinSelect();
-				board_position = MoveCoin(selected_coin, dice_value, i);
-				User[i].Coin[0].Position = board_position;
+				User[i].Coin[selected_coin].Position = MoveCoin(selected_coin, dice_value, i);
 
 				int coll_arr[2] = { 0 };
-				primeFactors(User[i].Coin[0].Position, coll_arr);
-				cout << coll_arr[0] << endl;
-				cout << coll_arr[1] << endl;
+				primeFactors(User[i].Coin[selected_coin].Position, coll_arr);
 				int index[2] = { 0 };
 				findXYinBoard(coll_arr[0], coll_arr[1], index);
-				User[i].Coin[0].xPos = index[0];
-				User[i].Coin[0].yPos = index[1];
+				User[i].Coin[selected_coin].xPos = index[0];
+				User[i].Coin[selected_coin].yPos = index[1];
 
-				if (board_position == 95) {
+				if (User[i].Coin[selected_coin].Position == 95) {
 					cout << User[i].name << " is the Winner" << endl;
 					Finished = true;
 					break;
@@ -155,7 +151,7 @@ int main(int argc, char** argv)
 		User[i].colourName = name;
 	}
 
-	thread t1(BoardGraphics,User);
+	thread t1(BoardGraphics,User,NPlayers);
 	thread t2(GamePlay);
 
 	t1.join();
