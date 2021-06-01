@@ -75,6 +75,12 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 				//cout << User[n].Coin[Selected_Coin].Position << endl;
 				if (n != player_number && board_position == User[n].Coin[Selected_Coin].Position) {
 					User[n].Coin[Selected_Coin].Position = Paths[n][0];
+					int coll_arr[2] = { 0 };
+					primeFactors(User[n].Coin[Selected_Coin].Position, coll_arr);
+					int index[2] = { 0 };
+					findXYinBoard(coll_arr[0], coll_arr[1], index);
+					User[n].Coin[Selected_Coin].xPos = index[0];
+					User[n].Coin[Selected_Coin].yPos = index[1];
 					cout << User[n].name << "'s Coin Was Killed" << endl;
 				}
 			}
