@@ -5,23 +5,22 @@
 int board_rows[5] = { 13,17,19,23,29 };
 int board_cols[5] = { 2,3,5,7,11 };
 
-void primeFactors(int n, int* coll_arr)
-{
-    // Print the number of 2s that divide n
+void primeFactors(int n, int* coll_arr){
+
+    // Input : An array to store the prime factors, the number to be factorsised
+    // Output : Prime factors
+    // Purpose : A function to get a unique combination of prime factors to extract row and column position
+
     while (n % 2 == 0)
     {
         coll_arr[0] = 2;
         n = n / 2;
     }
 
-    // n must be odd at this point. So we can skip
-    // one element (Note i = i +2)
     for (int i = 3; i <= sqrt(n); i = i + 2)
     {
-        // While i divides n, print i and divide n
         while (n % i == 0)
         {
-           //cout << i << " ";
             if (coll_arr[0] == 0) {
                 coll_arr[0] = i;
             }
@@ -39,6 +38,10 @@ void primeFactors(int n, int* coll_arr)
 }
 
 void findXYinBoard(int prime2, int prime1, int *indices) {
+
+    // Input : An array to store the row and column number, Prime factors
+    // Output : Get Row and Column value
+    // Purpose : Interfaces with a cell represented by a unique prime number and board graphics
     int i = 0;
     while (i < 5)
     {

@@ -3,19 +3,24 @@
 #include "typedefs.hpp"
 
 using namespace sf;
-//using namespace std;
 
 RenderWindow renderWindow(VideoMode(800, 800), "Chowka Bhaara");
 
 
 void moveCoinPosition(CircleShape triangle, RenderWindow* renderWindow, int row_value, int column_value)
 {
+	// Input: Coin shape, Graphics board, row and column value
+	// Output: Draw the coin shape in the updated position
+	// Purpose: To update coin position and interface with graphics  
 	triangle.setPosition({ (float)(105 * column_value + 137.5), (float)(105 * row_value + 137.5) });
 	renderWindow->draw(triangle);
 }
 
-void BoardGraphics(Player User[], int NPlayers) {
-	
+void BoardGraphics(Player User[], int NPlayers) 
+{
+	// Input: Player number
+	// Output: Display/Draw the main board
+	// Purpose: 
 	RenderWindow renderWindow(VideoMode(800, 800), "Chowka Bhaara");
 	Event event;
 

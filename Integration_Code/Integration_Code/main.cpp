@@ -14,14 +14,17 @@
 int NPlayers;
 Player* User;
 
-
+// Stores an array of traceable path which contains prime product indices 
 int Paths[4][25] = { {38,46,58,87,145,203,319,253,209,187,143,91,65,39,26,34,51,85,119,133,161,115,69,57,95},
 	{209,187,143,91,65,39,26,34,38,46,58,87,145,203,319,253,161,115,69,57,51,85,119,133,95},
 	{65,39,26,34,38,46,58,87,145,203,319,253,209,187,143,91,119,133,161,115,69,57,51,85,95},
 	{145,203,319,253,209,187,143,91,65,39,26,34,38,46,58,87,69,57,51,85,119,133,161,115,95} };
 
-int rolldice()
+int rolldice(void)
 {
+	// Input: void
+	// Output: Dice value from 1 to 8
+	// Purpose : Function to return a dice value to move coins
 	srand((unsigned int)time(NULL));
 
 	int dice_value;
@@ -49,6 +52,9 @@ int rolldice()
 }
 
 int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
+	// Input: Select a coin out of 4 coins, Dice value returned by roll dice, Player
+	// Output: Board position after dice roll (in terms of prime product)
+	// Purpose: Update position on board of a coin
 	int current_position_index = 0;
 	int new_position_index = 0;
 	int board_position = 0;
@@ -82,7 +88,11 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 }
 
 
-void GamePlay() {
+void GamePlay(void) {
+
+	// Input: void
+	// Output: Get row number and column number
+	// Purpose: Function comprising main gameplay and interfaces with board graphics
 	bool Finished = false;
 	int dice_value;
 	int selected_coin;
