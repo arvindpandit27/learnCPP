@@ -1,22 +1,19 @@
 #include <iostream>
-#include "typedefs.hpp"
+#include <thread>
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
+
+#include "typedefs.hpp"
 #include "CheckUserInputs.hpp"
-#include <thread>
 #include "BoardGraphics.hpp"
 #include "UserInput.hpp"
 #include "Utils.hpp"
 
-using namespace std::literals::chrono_literals;
 
-char keyboard_input;
-int ascii_code;
 int NPlayers;
 Player* User;
 
-bool Finished = false;
 
 int Paths[4][25] = { {38,46,58,87,145,203,319,253,209,187,143,91,65,39,26,34,51,85,119,133,161,115,69,57,95},
 	{209,187,143,91,65,39,26,34,38,46,58,87,145,203,319,253,161,115,69,57,51,85,119,133,95},
@@ -25,7 +22,7 @@ int Paths[4][25] = { {38,46,58,87,145,203,319,253,209,187,143,91,65,39,26,34,51,
 
 int rolldice()
 {
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 
 	int dice_value;
 	char keyboard_input;
@@ -86,6 +83,7 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 
 
 void GamePlay() {
+	bool Finished = false;
 	int dice_value;
 	int selected_coin;
 
@@ -104,6 +102,7 @@ void GamePlay() {
 		User[3].Coin[n].xPos = 4;
 		User[3].Coin[n].yPos = 2;
 	}
+
 	while (!Finished)
 	{
 		for (int i = 0; i < NPlayers; i++)

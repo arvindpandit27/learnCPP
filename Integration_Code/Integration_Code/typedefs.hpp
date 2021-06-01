@@ -21,7 +21,7 @@ class Player {
 public:
 	string name;
 	string colourName;
-	Colour_t colour;
+	Colour_t colour = RED;
 	Coins Coin[4];
 };
 

@@ -3,23 +3,14 @@
 #include "typedefs.hpp"
 
 using namespace sf;
-using namespace std;
+//using namespace std;
 
 RenderWindow renderWindow(VideoMode(800, 800), "Chowka Bhaara");
-void init_coin_position(CircleShape triangle, RenderWindow* renderWindow)
-{
-	triangle.setFillColor(sf::Color(255, 0, 0));
-	triangle.setPosition({ (float)(105 * 2 + 105), (float)(105 * 0 + 105) });
-	//triangle.setOutlineThickness(2);
-	//triangle.setFillColor(sf::Color(0,255,0));
-	renderWindow->draw(triangle);
-}
 
-void coin_position_move(CircleShape triangle, RenderWindow* renderWindow, float row_value, float column_value)
+
+void moveCoinPosition(CircleShape triangle, RenderWindow* renderWindow, int row_value, int column_value)
 {
 	triangle.setPosition({ (float)(105 * column_value + 137.5), (float)(105 * row_value + 137.5) });
-	//triangle.setOutlineThickness(2);
-	//triangle.setFillColor(sf::Color(0,255,0))
 	renderWindow->draw(triangle);
 }
 
@@ -62,14 +53,6 @@ void BoardGraphics(Player User[], int NPlayers) {
 				sq.setOutlineThickness(5);
 				sq.setOutlineColor(sf::Color(255, 215, 0));
 
-				//triangle.setFillColor(sf::Color(255, 0, 0));
-				//triangle.setPosition({ (float)(105 * 2.25 + 100), (float)(105 * 0 + 100) });
-				//triangle.setOutlineThickness(2);
-				//triangle.setFillColor(sf::Color(0,255,0));
-				//renderWindow.draw(triangle);
-				//init_coin_position(triangle,  &renderWindow);
-
-
 				renderWindow.draw(sq);
 				if ((i % 2 == 0 && j % 2 == 0 && (((i + j) == 2) || ((i + j) == 6))) || (i == 2 && j == 2))
 				{
@@ -82,11 +65,10 @@ void BoardGraphics(Player User[], int NPlayers) {
 				}
 
 			}
-			// renderwindow.draw(line ,2, sf::lines);
 		}
 
 		for (int n = 0; n < NPlayers; n++) {
-			coin_position_move(Triangle[n], &renderWindow, User[n].Coin[0].xPos, User[n].Coin[0].yPos);
+			moveCoinPosition(Triangle[n], &renderWindow, User[n].Coin[0].xPos, User[n].Coin[0].yPos);
 		}
 		renderWindow.display();
 	}
