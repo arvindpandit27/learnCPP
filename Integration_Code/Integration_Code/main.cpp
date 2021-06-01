@@ -112,6 +112,7 @@ void GamePlay() {
 			do {
 				dice_value = rolldice();
 				selected_coin = CoinSelect();
+				cout << dice_value << endl;
 				User[i].Coin[selected_coin].Position = MoveCoin(selected_coin, dice_value, i);
 
 				int coll_arr[2] = { 0 };
