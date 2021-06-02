@@ -9,7 +9,7 @@
 #include "BoardGraphics.hpp"
 #include "UserInput.hpp"
 #include "Utils.hpp"
-
+#include <random>
 
 int NPlayers;
 Player* User;
@@ -37,11 +37,20 @@ int rolldice(void)
 
 	if (ascii_code == 82 || ascii_code == 114)
 	{
-		dice_value = (rand() % 5) + 1;
-		if (dice_value == 5)
-		{
+		std::random_device rd; 
+		std::mt19937 gen(rd()); 
+		std::uniform_int_distribution<> distrib(1, 50);
+		dice_value = distrib(gen);
+		if (  (dice_value) >= 1 && (dice_value < 7)  ) 
+			dice_value = 1;
+		else if ( (dice_value >= 7) & (dice_value < 19) ) 
+			dice_value = 2;
+		else if (  (dice_value >= 19) & (dice_value < 33)  ) 
+			dice_value = 3;
+		else if (  (dice_value >= 33) & (dice_value < 41)  ) 
+			dice_value = 4;
+		else if (  (dice_value >= 41) & (dice_value <= 50) ) 
 			dice_value = 8;
-		}
 	}
 	else
 	{
