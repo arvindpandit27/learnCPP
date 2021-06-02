@@ -14,6 +14,14 @@
 int NPlayers;
 Player* User;
 
+void init_coin_kill()
+{
+	for (int k = 0; k < NPlayers; k++)
+	{
+		User[k].Coin[0].Kill_Pos = 6;
+	}
+}
+
 
 int Paths[4][25] = { {38,46,58,87,145,203,319,253,209,187,143,91,65,39,26,34,51,85,119,133,161,115,69,57,95},
 	{209,187,143,91,65,39,26,34,38,46,58,87,145,203,319,253,161,115,69,57,51,85,119,133,95},
@@ -53,6 +61,7 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 	int new_position_index = 0;
 	int board_position = 0;
 
+	init_coin_kill();
 	board_position = User[player_number].Coin[Selected_Coin].Position;
 	for (int n = 0; n < 25; n++) {
 		if (board_position == Paths[player_number][n]) {
@@ -73,6 +82,7 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 				if (n != player_number && board_position == User[n].Coin[Selected_Coin].Position) {
 					User[n].Coin[Selected_Coin].Position = Paths[n][0];
 					cout << User[n].name << "'s Coin Was Killed" << endl;
+					User[n].Coin[Selected_Coin].Kill_Pos = n;
 				}
 			}
 		}
@@ -110,10 +120,26 @@ void GamePlay() {
 			cout << User[i].name << "'s turn" << endl;
 			do {
 				dice_value = rolldice();
+				static int l = 0;
+				if ((i == 0) && (l == 0))
+				{
+					dice_value = 1;
+					l = 1;
+				}
+				static int k = 0;
+				if ((i == 1) && ((k == 0) || (k == 1)))
+				{
+					dice_value = 4;
+					k = k + 1;
+				}
+				else if ((i == 1) && (k == 2))
+				{
+					dice_value = 1;
+				}
 				selected_coin = CoinSelect();
 				cout << dice_value << endl;
-				User[i].Coin[selected_coin].Position = MoveCoin(selected_coin, dice_value, i);
 
+				User[i].Coin[selected_coin].Position = MoveCoin(selected_coin, dice_value, i);
 				int coll_arr[2] = { 0 };
 				primeFactors(User[i].Coin[selected_coin].Position, coll_arr);
 				int index[2] = { 0 };

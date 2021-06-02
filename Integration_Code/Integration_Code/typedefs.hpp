@@ -15,6 +15,7 @@ public:
 	int Position;
 	int xPos;
 	int yPos;
+	int Kill_Pos;
 };
 
 class Player {

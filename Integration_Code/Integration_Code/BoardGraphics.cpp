@@ -70,6 +70,13 @@ void BoardGraphics(Player User[], int NPlayers) {
 		for (int n = 0; n < NPlayers; n++) {
 			moveCoinPosition(Triangle[n], &renderWindow, User[n].Coin[0].xPos, User[n].Coin[0].yPos);
 		}
+		if (User[0].Coin[0].Kill_Pos == 0)
+		{
+			User[0].Coin[0].xPos = 2;
+			User[0].Coin[0].yPos = 4;
+			moveCoinPosition(Triangle[0], &renderWindow, User[0].Coin[0].xPos, User[0].Coin[0].yPos);
+		}
+
 		renderWindow.display();
 	}
 }
