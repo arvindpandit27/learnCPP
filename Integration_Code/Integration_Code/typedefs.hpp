@@ -4,6 +4,7 @@ using namespace std;
 #define NCOINS  4
 #define NO_ACCESS 0
 #define ACCESS_GRANTED 1
+#define WAIT_FOR_ACCESS_INDEX 15
 
 typedef enum {
 	RED = 0,

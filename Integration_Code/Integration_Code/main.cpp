@@ -63,7 +63,21 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 		}
 	}
 
-	new_position_index = current_position_index + dice_value;
+	if (User[player_number].inner_loop_access == ACCESS_GRANTED)
+	{
+		new_position_index = current_position_index + dice_value;
+	}
+	else
+	{
+		new_position_index = current_position_index + dice_value;
+		if (new_position_index > WAIT_FOR_ACCESS_INDEX)
+		{
+			cout << User[player_number].name << " Doesn't have inner loop access" << endl;
+			cout << "Please Kill a opponent coin to get inner loop access" << endl;
+			new_position_index = current_position_index;
+		}
+	}
+
 	if (new_position_index > 24) {
 		cout << "Cannot Reach Centre" << endl;
 	}
@@ -84,6 +98,7 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 					User[n].Coin[Selected_Coin].yPos = kill_index[1];
 					User[player_number].inner_loop_access = ACCESS_GRANTED;
 					check_user_access = User[player_number].inner_loop_access;
+					cout << User[player_number].name << "'s inner loop access granted" << endl;
 				}
 			}
 		}
