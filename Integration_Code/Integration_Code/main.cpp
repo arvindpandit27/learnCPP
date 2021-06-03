@@ -13,8 +13,7 @@
 
 int NPlayers;
 Player* User;
-int repeat_dice = 0;
-int no_repeat_dice = 0;
+//#define TEST_CODE
 
 // Stores an array of traceable path which contains prime product indices 
 
@@ -165,6 +164,7 @@ void GamePlay(void) {
 			cout << User[i].name << "'s turn" << endl;
 			do {
 				dice_value = rolldice();
+#ifdef TEST_CODE
 				static int l = 0;
 				if ((i == 0) && (l == 0))
 				{
@@ -181,6 +181,9 @@ void GamePlay(void) {
 				{
 					dice_value = 1;
 				}
+#endif // TEST_CODE
+
+
 				selected_coin = CoinSelect();
 				cout << dice_value << endl;
 				//repeat_dice = 0;
