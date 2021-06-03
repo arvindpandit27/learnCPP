@@ -5,6 +5,10 @@ using namespace std;
 #define NO_ACCESS 0
 #define ACCESS_GRANTED 1
 #define WAIT_FOR_ACCESS_INDEX 15
+#define REPEAT 1
+#define NO_REPEAT 2
+#define NONE 0
+
 
 typedef enum {
 	RED = 0,
@@ -27,6 +31,7 @@ public:
 	Colour_t colour;
 	Coins Coin[4];
 	uint8_t inner_loop_access = NO_ACCESS;
+	uint8_t check_to_repat = NONE;
 };
 
 

@@ -14,6 +14,7 @@
 int NPlayers;
 Player* User;
 int repeat_dice = 0;
+int no_repeat_dice = 0;
 
 // Stores an array of traceable path which contains prime product indices 
 
@@ -91,6 +92,12 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 			cout << User[player_number].name << " Doesn't have inner loop access" << endl;
 			cout << "Please Kill a opponent coin to get inner loop access" << endl;
 			new_position_index = current_position_index;
+			if ((dice_value == 4) || (dice_value == 8))
+			{
+				cout << "No use of giving another chance" << endl;
+				User[player_number].check_to_repat = NO_REPEAT;
+			}
+
 		}
 	}
 
@@ -115,7 +122,7 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 					User[player_number].inner_loop_access = ACCESS_GRANTED;
 					check_user_access = User[player_number].inner_loop_access;
 					cout << User[player_number].name << "'s inner loop access granted" << endl;
-					repeat_dice = 1;
+					User[player_number].check_to_repat = REPEAT;
 					cout << User[player_number].name << "'s gets another chance for killing opponent" << endl;
 				}
 			}
@@ -176,7 +183,8 @@ void GamePlay(void) {
 				}
 				selected_coin = CoinSelect();
 				cout << dice_value << endl;
-				repeat_dice = 0;
+				//repeat_dice = 0;
+				User[i].check_to_repat = NONE;
 				User[i].Coin[selected_coin].Position = MoveCoin(selected_coin, dice_value, i);
 				int coll_arr[2] = { 0 };
 				primeFactors(User[i].Coin[selected_coin].Position, coll_arr);
@@ -190,7 +198,7 @@ void GamePlay(void) {
 					Finished = true;
 					break;
 				}
-			} while (dice_value == 4 || dice_value == 8 || dice_value == 0 || repeat_dice == 1);
+			} while ((((dice_value == 4) || (dice_value == 8)) && (User[i].check_to_repat != NO_REPEAT)) || dice_value == 0 || User[i].check_to_repat == REPEAT);
 			if (Finished == true)
 				break;
 		}
