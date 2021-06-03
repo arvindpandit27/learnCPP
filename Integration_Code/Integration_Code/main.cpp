@@ -14,16 +14,9 @@
 int NPlayers;
 Player* User;
 
-void init_coin_kill()
-{
-	for (int k = 0; k < NPlayers; k++)
-	{
-		User[k].Coin[0].Kill_Pos = 6;
-	}
-}
 
 
-int Paths[4][25] = { {38,46,58,87,145,203,319,253,209,187,143,91,65,39,26,34,51,85,119,133,161,115,69,57,95},
+extern int Paths[4][25] = { {38,46,58,87,145,203,319,253,209,187,143,91,65,39,26,34,51,85,119,133,161,115,69,57,95},
 	{209,187,143,91,65,39,26,34,38,46,58,87,145,203,319,253,161,115,69,57,51,85,119,133,95},
 	{65,39,26,34,38,46,58,87,145,203,319,253,209,187,143,91,119,133,161,115,69,57,51,85,95},
 	{145,203,319,253,209,187,143,91,65,39,26,34,38,46,58,87,69,57,51,85,119,133,161,115,95} };
@@ -60,8 +53,8 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 	int current_position_index = 0;
 	int new_position_index = 0;
 	int board_position = 0;
+	volatile uint8_t check_user_access = 0;
 
-	init_coin_kill();
 	board_position = User[player_number].Coin[Selected_Coin].Position;
 	for (int n = 0; n < 25; n++) {
 		if (board_position == Paths[player_number][n]) {
@@ -76,13 +69,21 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 	}
 	else {
 		board_position = Paths[player_number][new_position_index];
-		if (board_position != Paths[0][0] && board_position != Paths[1][0] && board_position != Paths[2][0] && board_position != Paths[3][0]) {
+		if (board_position != Paths[0][0] && board_position != Paths[1][0] && board_position != Paths[2][0] && board_position != Paths[3][0] && board_position != Paths[0][24]) {
 			for (int n = 0; n < NPlayers; n++) {
 				//cout << User[n].Coin[Selected_Coin].Position << endl;
 				if (n != player_number && board_position == User[n].Coin[Selected_Coin].Position) {
 					User[n].Coin[Selected_Coin].Position = Paths[n][0];
 					cout << User[n].name << "'s Coin Was Killed" << endl;
-					User[n].Coin[Selected_Coin].Kill_Pos = n;
+					User[n].Coin[Selected_Coin].Position = Paths[n][0];
+					int kill_coll_arr[2] = { 0 };
+					primeFactors(User[n].Coin[Selected_Coin].Position, kill_coll_arr);
+					int kill_index[2] = { 0 };
+					findXYinBoard(kill_coll_arr[0], kill_coll_arr[1], kill_index);
+					User[n].Coin[Selected_Coin].xPos = kill_index[0];
+					User[n].Coin[Selected_Coin].yPos = kill_index[1];
+					User[player_number].inner_loop_access = ACCESS_GRANTED;
+					check_user_access = User[player_number].inner_loop_access;
 				}
 			}
 		}
