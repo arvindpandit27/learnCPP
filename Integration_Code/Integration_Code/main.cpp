@@ -13,6 +13,7 @@
 
 int NPlayers;
 Player* User;
+int repeat_dice = 0;
 
 
 
@@ -99,6 +100,8 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 					User[player_number].inner_loop_access = ACCESS_GRANTED;
 					check_user_access = User[player_number].inner_loop_access;
 					cout << User[player_number].name << "'s inner loop access granted" << endl;
+					repeat_dice = 1;
+					cout << User[player_number].name << "'s gets another chance for killing opponent" << endl;
 				}
 			}
 		}
@@ -154,7 +157,7 @@ void GamePlay() {
 				}
 				selected_coin = CoinSelect();
 				cout << dice_value << endl;
-
+				repeat_dice = 0;
 				User[i].Coin[selected_coin].Position = MoveCoin(selected_coin, dice_value, i);
 				int coll_arr[2] = { 0 };
 				primeFactors(User[i].Coin[selected_coin].Position, coll_arr);
@@ -168,7 +171,7 @@ void GamePlay() {
 					Finished = true;
 					break;
 				}
-			} while (dice_value == 4 || dice_value == 8 || dice_value == 0);
+			} while (dice_value == 4 || dice_value == 8 || dice_value == 0 || repeat_dice == 1);
 			if (Finished == true)
 				break;
 		}
