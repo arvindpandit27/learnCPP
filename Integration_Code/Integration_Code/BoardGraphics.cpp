@@ -75,6 +75,7 @@ void BoardGraphics(Player User[], int NPlayers)
 		for (int n = 0; n < NPlayers; n++) {
 			moveCoinPosition(Triangle[n], &renderWindow, User[n].Coin[0].xPos, User[n].Coin[0].yPos);
 		}
+
 		renderWindow.display();
 	}
 }
