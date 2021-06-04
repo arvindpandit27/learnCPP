@@ -110,6 +110,7 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 				//cout << User[n].Coin[Selected_Coin].Position << endl;
 				if (n != player_number && board_position == User[n].Coin[Selected_Coin].Position) {
 					User[n].Coin[Selected_Coin].Position = Paths[n][0];
+					User[n].Coin[Selected_Coin].isDrawn = 0;
 					int coll_arr[2] = { 0 };
 					primeFactors(User[n].Coin[Selected_Coin].Position, coll_arr);
 					int index[2] = { 0 };
@@ -133,6 +134,7 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 			}
 		}
 		User[player_number].Coin[Selected_Coin].Position = board_position;
+		User[player_number].Coin[Selected_Coin].isDrawn = 0;
 	}
 	return board_position;
 }

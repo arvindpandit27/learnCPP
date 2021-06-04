@@ -165,11 +165,26 @@ void BoardGraphics(Player User[], int NPlayers)
 			}
 		}
 
-		for (int n = 0; n < NPlayers; n++) {
-			moveCoinPosition(Triangle[n], &renderWindow, User[n].Coin[0].xPos, User[n].Coin[0].yPos, n, 0);
-			moveCoinPosition(Diamond[n], &renderWindow, User[n].Coin[1].xPos, User[n].Coin[1].yPos, n, 1);
-			moveCoinPosition(Pentagon[n], &renderWindow, User[n].Coin[2].xPos, User[n].Coin[2].yPos, n, 2);
-			moveCoinPosition(Hexagon[n], &renderWindow, User[n].Coin[3].xPos, User[n].Coin[3].yPos, n, 3);
+		for (int np = 0; np < NPlayers; np++) {
+			for (int nc = 0; nc < 4; nc++) {
+				if (User[np].Coin[nc].isDrawn == 0) {
+					User[np].Coin[nc].isDrawn == 1;
+					switch (nc) {
+					case 0:
+						moveCoinPosition(Triangle[np], &renderWindow, User[np].Coin[nc].xPos, User[np].Coin[nc].yPos, np, nc);
+						break;
+					case 1:
+						moveCoinPosition(Diamond[np], &renderWindow, User[np].Coin[nc].xPos, User[np].Coin[nc].yPos, np, nc);
+						break;
+					case 2:
+						moveCoinPosition(Pentagon[np], &renderWindow, User[np].Coin[nc].xPos, User[np].Coin[nc].yPos, np, nc);
+						break;
+					case 3:
+						moveCoinPosition(Hexagon[np], &renderWindow, User[np].Coin[nc].xPos, User[np].Coin[nc].yPos, np, nc);
+						break;
+					}
+				}
+			}
 		}
 
 		renderWindow.display();
