@@ -66,6 +66,8 @@ int rolldice(void)
 
 void AdjustCoinCount() {
 	// Purpose : Determine the number of coins in a given position
+	int ref_player;
+	int ref_coin;
 	for (int n = 0; n < sizeof(CoinCountInPosition) / sizeof(CoinCountInPosition[0]); n++) {
 		CoinCountInPosition[n] = 0;
 		for (int np = 0; np < NPlayers; np++) {
@@ -73,15 +75,14 @@ void AdjustCoinCount() {
 				if (User[np].Coin[nc].Position == Paths[0][n]) { 
 					User[np].Coin[nc].DrawPosition = CoinCountInPosition[n];
 					CoinCountInPosition[n]++; 
+					ref_player = np;
+					ref_coin = nc;
+					User[np].Coin[nc].SoloCoinFlag = 0;
 				}
 			}
 		}
-		if (n == (sizeof(CoinCountInPosition) / sizeof(CoinCountInPosition[0]) - 1)) 
-			cout << CoinCountInPosition[n] << endl;
-		else 
-			cout << CoinCountInPosition[n] << " ";
+		if (CoinCountInPosition[n] == 1) User[ref_player].Coin[ref_coin].SoloCoinFlag = 1;
 	}
-
 }
 
 int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
@@ -131,7 +132,6 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 			for (int n = 0; n < NPlayers; n++) {
 				//cout << User[n].Coin[Selected_Coin].Position << endl;
 				if (n != player_number && board_position == User[n].Coin[Selected_Coin].Position) {
-					User[n].Coin[Selected_Coin].isDrawn = 0;
 					cout << User[n].name << "'s Coin Was Killed" << endl;
 					User[n].Coin[Selected_Coin].Position = Paths[n][0];
 					int kill_coll_arr[2] = { 0 };
@@ -149,7 +149,6 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 			}
 		}
 		User[player_number].Coin[Selected_Coin].Position = board_position;
-		User[player_number].Coin[Selected_Coin].isDrawn = 0;
 		AdjustCoinCount();
 	}
 	return board_position;

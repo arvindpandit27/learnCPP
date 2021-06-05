@@ -22,8 +22,8 @@ public:
 	int Position;
 	int xPos;
 	int yPos;
-	int isDrawn = 0;
 	int DrawPosition = 0;
+	int SoloCoinFlag = 0;
 };
 
 class Player {
