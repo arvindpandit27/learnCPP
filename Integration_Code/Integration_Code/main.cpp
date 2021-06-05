@@ -22,7 +22,7 @@ int Paths[4][25] = { {38,46,58,87,145,203,319,253,209,187,143,91,65,39,26,34,51,
 	{65,39,26,34,38,46,58,87,145,203,319,253,209,187,143,91,119,133,161,115,69,57,51,85,95},
 	{145,203,319,253,209,187,143,91,65,39,26,34,38,46,58,87,69,57,51,85,119,133,161,115,95} };
 
-int CoinCountInPosition[25] = {4,0,0,0,4,0,0,0,4,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0};
+int CoinCountInPosition[25] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 int rolldice(void)
 {
@@ -62,6 +62,26 @@ int rolldice(void)
 		dice_value = 0;
 	}
 	return dice_value;
+}
+
+void AdjustCoinCount() {
+	// Purpose : Determine the number of coins in a given position
+	for (int n = 0; n < sizeof(CoinCountInPosition) / sizeof(CoinCountInPosition[0]); n++) {
+		CoinCountInPosition[n] = 0;
+		for (int np = 0; np < NPlayers; np++) {
+			for (int nc = 0; nc < 4; nc++) {
+				if (User[np].Coin[nc].Position == Paths[0][n]) { 
+					User[np].Coin[nc].DrawPosition = CoinCountInPosition[n];
+					CoinCountInPosition[n]++; 
+				}
+			}
+		}
+		if (n == (sizeof(CoinCountInPosition) / sizeof(CoinCountInPosition[0]) - 1)) 
+			cout << CoinCountInPosition[n] << endl;
+		else 
+			cout << CoinCountInPosition[n] << " ";
+	}
+
 }
 
 int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
@@ -111,14 +131,7 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 			for (int n = 0; n < NPlayers; n++) {
 				//cout << User[n].Coin[Selected_Coin].Position << endl;
 				if (n != player_number && board_position == User[n].Coin[Selected_Coin].Position) {
-					User[n].Coin[Selected_Coin].Position = Paths[n][0];
 					User[n].Coin[Selected_Coin].isDrawn = 0;
-					int coll_arr[2] = { 0 };
-					primeFactors(User[n].Coin[Selected_Coin].Position, coll_arr);
-					int index[2] = { 0 };
-					findXYinBoard(coll_arr[0], coll_arr[1], index);
-					User[n].Coin[Selected_Coin].xPos = index[0];
-					User[n].Coin[Selected_Coin].yPos = index[1];
 					cout << User[n].name << "'s Coin Was Killed" << endl;
 					User[n].Coin[Selected_Coin].Position = Paths[n][0];
 					int kill_coll_arr[2] = { 0 };
@@ -137,6 +150,7 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 		}
 		User[player_number].Coin[Selected_Coin].Position = board_position;
 		User[player_number].Coin[Selected_Coin].isDrawn = 0;
+		AdjustCoinCount();
 	}
 	return board_position;
 }
@@ -166,6 +180,7 @@ void GamePlay(void) {
 		User[3].Coin[n].xPos = 4;
 		User[3].Coin[n].yPos = 2;
 	}
+	AdjustCoinCount();
 
 	while (!Finished)
 	{

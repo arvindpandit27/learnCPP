@@ -7,75 +7,60 @@ using namespace sf;
 RenderWindow renderWindow(VideoMode(800, 800), "Chowka Bhaara");
 
 
-void moveCoinPosition(CircleShape shape, RenderWindow* renderWindow, int row_value, int column_value, int player_number, int coin_number)
+void moveCoinPosition(CircleShape shape, RenderWindow* renderWindow, int row_value, int column_value, int draw_position)
 {
 	// Input: Coin shape, Graphics board, row and column value
 	// Output: Draw the coin shape in the updated position
 	// Purpose: To update coin position and interface with graphics  
-	switch (coin_number) {
+
+	switch (draw_position) {
 	case 0:
-		switch (player_number) {
-		case 0:
-			shape.setPosition({ (float)(105 * column_value + 107.5), (float)(105 * row_value + 137.5) });
-			break;
-		case 1:
-			shape.setPosition({ (float)(105 * column_value + 167.5), (float)(105 * row_value + 137.5) });
-			break;
-		case 2:
-			shape.setPosition({ (float)(105 * column_value + 137.5), (float)(105 * row_value + 107.5) });
-			break;
-		case 3:
-			shape.setPosition({ (float)(105 * column_value + 137.5), (float)(105 * row_value + 167.5) });
-			break;
-		}
+		shape.setPosition({ (float)(105 * column_value + 107.5), (float)(105 * row_value + 137.5) });
 		break;
 	case 1:
-		switch (player_number) {
-		case 0:
-			shape.setPosition({ (float)(105 * column_value + 167.5), (float)(105 * row_value + 137.5) });
-			break;
-		case 1:
-			shape.setPosition({ (float)(105 * column_value + 137.5), (float)(105 * row_value + 107.5) });
-			break;
-		case 2:
-			shape.setPosition({ (float)(105 * column_value + 137.5), (float)(105 * row_value + 167.5) });
-			break;
-		case 3:
-			shape.setPosition({ (float)(105 * column_value + 107.5), (float)(105 * row_value + 137.5) });
-			break;
-		}
+		shape.setPosition({ (float)(105 * column_value + 167.5), (float)(105 * row_value + 137.5) });
 		break;
 	case 2:
-		switch (player_number) {
-		case 0:
-			shape.setPosition({ (float)(105 * column_value + 137.5), (float)(105 * row_value + 107.5) });
-			break;
-		case 1:
-			shape.setPosition({ (float)(105 * column_value + 137.5), (float)(105 * row_value + 167.5) });
-			break;
-		case 2:
-			shape.setPosition({ (float)(105 * column_value + 107.5), (float)(105 * row_value + 137.5) });
-			break;
-		case 3:
-			shape.setPosition({ (float)(105 * column_value + 167.5), (float)(105 * row_value + 137.5) });
-			break;
-		}
+		shape.setPosition({ (float)(105 * column_value + 137.5), (float)(105 * row_value + 107.5) });
 		break;
 	case 3:
-		switch (player_number) {
-		case 0:
-			shape.setPosition({ (float)(105 * column_value + 137.5), (float)(105 * row_value + 167.5) });
-			break;
-		case 1:
-			shape.setPosition({ (float)(105 * column_value + 107.5), (float)(105 * row_value + 137.5) });
-			break;
-		case 2:
-			shape.setPosition({ (float)(105 * column_value + 167.5), (float)(105 * row_value + 137.5) });
-			break;
-		case 3:
-			shape.setPosition({ (float)(105 * column_value + 137.5), (float)(105 * row_value + 107.5) });
-			break;
-		}
+		shape.setPosition({ (float)(105 * column_value + 137.5), (float)(105 * row_value + 167.5) });
+		break;
+	case 4:
+		shape.setPosition({ (float)(105 * column_value + 97.5), (float)(105 * row_value + 137.5) });
+		break;
+	case 5:
+		shape.setPosition({ (float)(105 * column_value + 177.5), (float)(105 * row_value + 137.5) });
+		break;
+	case 6:
+		shape.setPosition({ (float)(105 * column_value + 137.5), (float)(105 * row_value + 97.5) });
+		break;
+	case 7:
+		shape.setPosition({ (float)(105 * column_value + 137.5), (float)(105 * row_value + 177.5) });
+		break;
+	case 8:
+		shape.setPosition({ (float)(105 * column_value + 87.5), (float)(105 * row_value + 137.5) });
+		break;
+	case 9:
+		shape.setPosition({ (float)(105 * column_value + 187.5), (float)(105 * row_value + 137.5) });
+		break;
+	case 10:
+		shape.setPosition({ (float)(105 * column_value + 137.5), (float)(105 * row_value + 87.5) });
+		break;
+	case 11:
+		shape.setPosition({ (float)(105 * column_value + 137.5), (float)(105 * row_value + 187.5) });
+		break;
+	case 12:
+		shape.setPosition({ (float)(105 * column_value + 77.5), (float)(105 * row_value + 137.5) });
+		break;
+	case 13:
+		shape.setPosition({ (float)(105 * column_value + 197.5), (float)(105 * row_value + 137.5) });
+		break;
+	case 14:
+		shape.setPosition({ (float)(105 * column_value + 137.5), (float)(105 * row_value + 77.5) });
+		break;
+	case 15:
+		shape.setPosition({ (float)(105 * column_value + 137.5), (float)(105 * row_value + 197.5) });
 		break;
 	}
 	renderWindow->draw(shape);
@@ -168,25 +153,23 @@ void BoardGraphics(Player User[], int NPlayers)
 		for (int np = 0; np < NPlayers; np++) {
 			for (int nc = 0; nc < 4; nc++) {
 				if (User[np].Coin[nc].isDrawn == 0) {
-					User[np].Coin[nc].isDrawn == 1;
 					switch (nc) {
 					case 0:
-						moveCoinPosition(Triangle[np], &renderWindow, User[np].Coin[nc].xPos, User[np].Coin[nc].yPos, np, nc);
+						moveCoinPosition(Triangle[np], &renderWindow, User[np].Coin[nc].xPos, User[np].Coin[nc].yPos, User[np].Coin[nc].DrawPosition);
 						break;
 					case 1:
-						moveCoinPosition(Diamond[np], &renderWindow, User[np].Coin[nc].xPos, User[np].Coin[nc].yPos, np, nc);
+						moveCoinPosition(Diamond[np], &renderWindow, User[np].Coin[nc].xPos, User[np].Coin[nc].yPos, User[np].Coin[nc].DrawPosition);
 						break;
 					case 2:
-						moveCoinPosition(Pentagon[np], &renderWindow, User[np].Coin[nc].xPos, User[np].Coin[nc].yPos, np, nc);
+						moveCoinPosition(Pentagon[np], &renderWindow, User[np].Coin[nc].xPos, User[np].Coin[nc].yPos, User[np].Coin[nc].DrawPosition);
 						break;
 					case 3:
-						moveCoinPosition(Hexagon[np], &renderWindow, User[np].Coin[nc].xPos, User[np].Coin[nc].yPos, np, nc);
+						moveCoinPosition(Hexagon[np], &renderWindow, User[np].Coin[nc].xPos, User[np].Coin[nc].yPos, User[np].Coin[nc].DrawPosition);
 						break;
 					}
 				}
 			}
 		}
-
 		renderWindow.display();
 	}
 }

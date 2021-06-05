@@ -23,6 +23,7 @@ public:
 	int xPos;
 	int yPos;
 	int isDrawn = 0;
+	int DrawPosition = 0;
 };
 
 class Player {
