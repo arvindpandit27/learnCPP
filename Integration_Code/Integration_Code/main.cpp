@@ -129,22 +129,27 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 	else {
 		board_position = Paths[player_number][new_position_index];
 		if (board_position != Paths[0][0] && board_position != Paths[1][0] && board_position != Paths[2][0] && board_position != Paths[3][0] && board_position != Paths[0][24]) {
-			for (int n = 0; n < NPlayers; n++) {
-				//cout << User[n].Coin[Selected_Coin].Position << endl;
-				if (n != player_number && board_position == User[n].Coin[Selected_Coin].Position) {
-					cout << User[n].name << "'s Coin Was Killed" << endl;
-					User[n].Coin[Selected_Coin].Position = Paths[n][0];
-					int kill_coll_arr[2] = { 0 };
-					primeFactors(User[n].Coin[Selected_Coin].Position, kill_coll_arr);
-					int kill_index[2] = { 0 };
-					findXYinBoard(kill_coll_arr[0], kill_coll_arr[1], kill_index);
-					User[n].Coin[Selected_Coin].xPos = kill_index[0];
-					User[n].Coin[Selected_Coin].yPos = kill_index[1];
-					User[player_number].inner_loop_access = ACCESS_GRANTED;
-					check_user_access = User[player_number].inner_loop_access;
-					cout << User[player_number].name << "'s inner loop access granted" << endl;
-					User[player_number].check_to_repat = REPEAT;
-					cout << User[player_number].name << "'s gets another chance for killing opponent" << endl;
+			for (int n = 0; n < NPlayers; n++) 
+			{
+				for (int k = 0; k < 4; k++)
+				{
+					//cout << User[n].Coin[Selected_Coin].Position << endl;
+					if (n != player_number && board_position == User[n].Coin[k].Position)
+					{
+						cout << User[n].name << "'s Coin Was Killed" << endl;
+						User[n].Coin[k].Position = Paths[n][0];
+						int kill_coll_arr[2] = { 0 };
+						primeFactors(User[n].Coin[k].Position, kill_coll_arr);
+						int kill_index[2] = { 0 };
+						findXYinBoard(kill_coll_arr[0], kill_coll_arr[1], kill_index);
+						User[n].Coin[k].xPos = kill_index[0];
+						User[n].Coin[k].yPos = kill_index[1];
+						User[player_number].inner_loop_access = ACCESS_GRANTED;
+						check_user_access = User[player_number].inner_loop_access;
+						cout << User[player_number].name << "'s inner loop access granted" << endl;
+						User[player_number].check_to_repat = REPEAT;
+						cout << User[player_number].name << "'s gets another chance for killing opponent" << endl;
+					}
 				}
 			}
 		}
@@ -206,10 +211,10 @@ void GamePlay(void) {
 					dice_value = 1;
 				}
 #endif // TEST_CODE
-
-
-				selected_coin = CoinSelect();
 				cout << dice_value << endl;
+				cout << "Select the" << User[i].name << "coin" << endl;
+				selected_coin = CoinSelect();
+				cin >> selected_coin;
 				//repeat_dice = 0;
 				User[i].check_to_repat = NONE;
 				User[i].Coin[selected_coin].Position = MoveCoin(selected_coin, dice_value, i);
