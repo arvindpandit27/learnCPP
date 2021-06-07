@@ -8,6 +8,8 @@ using namespace std;
 #define REPEAT 1
 #define NO_REPEAT 2
 #define NONE 0
+#define START 0
+#define FINISH 1
 
 
 typedef enum {
@@ -24,6 +26,7 @@ public:
 	int yPos;
 	int DrawPosition = 0;
 	int SoloCoinFlag = 0;
+	uint8_t Finish_flag = START;
 };
 
 class Player {
@@ -31,7 +34,7 @@ public:
 	string name;
 	string colourName;
 	Colour_t colour;
-	Coins Coin[4];
+	Coins Coin[5];
 	uint8_t inner_loop_access = NO_ACCESS;
 	uint8_t check_to_repat = NONE;
 };

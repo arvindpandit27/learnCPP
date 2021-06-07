@@ -168,6 +168,7 @@ void GamePlay(void) {
 	bool Finished = false;
 	int dice_value;
 	int selected_coin;
+	static int count_finish = 0;
 
 	// Initialize Coin Positions
 	for (int n = 0; n < 4; n++) {
@@ -225,10 +226,18 @@ void GamePlay(void) {
 				User[i].Coin[selected_coin].xPos = index[0];
 				User[i].Coin[selected_coin].yPos = index[1];
 
-				if (User[i].Coin[selected_coin].Position == 95) {
-					cout << User[i].name << " is the Winner" << endl;
-					Finished = true;
-					break;
+				for (int k = 0; k < 4; k++)
+				{
+					if (User[i].Coin[k].Position == 95)
+					{
+						User[i].Coin[k].Finish_flag = FINISH;
+						if ((User[i].Coin[0].Finish_flag == FINISH) && (User[i].Coin[1].Finish_flag == FINISH) && (User[i].Coin[2].Finish_flag == FINISH) && (User[i].Coin[3].Finish_flag == FINISH))
+						{
+							cout << User[i].name << " is the Winner" << endl;
+							Finished = true;
+							break;
+						}
+					}
 				}
 			} while ((((dice_value == 4) || (dice_value == 8)) && (User[i].check_to_repat != NO_REPEAT)) || dice_value == 0 || User[i].check_to_repat == REPEAT);
 			if (Finished == true)
