@@ -125,6 +125,7 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 
 	if (new_position_index > 24) {
 		cout << "Cannot Reach Centre" << endl;
+		User[player_number].Coin[Selected_Coin].Select_Other_Coin = YES_CHANGE;
 	}
 	else {
 		board_position = Paths[player_number][new_position_index];
@@ -218,7 +219,15 @@ void GamePlay(void) {
 				cin >> selected_coin;
 				//repeat_dice = 0;
 				User[i].check_to_repat = NONE;
+				User[i].Coin[selected_coin].Select_Other_Coin = NO_REQ;
 				User[i].Coin[selected_coin].Position = MoveCoin(selected_coin, dice_value, i);
+				while (User[i].Coin[selected_coin].Select_Other_Coin == YES_CHANGE)
+				{
+					cout << "Please select coin other then coin  " << selected_coin << endl;
+					cin >> selected_coin;
+					User[i].Coin[selected_coin].Select_Other_Coin = NO_REQ;
+					User[i].Coin[selected_coin].Position = MoveCoin(selected_coin, dice_value, i);
+				}
 				int coll_arr[2] = { 0 };
 				primeFactors(User[i].Coin[selected_coin].Position, coll_arr);
 				int index[2] = { 0 };
