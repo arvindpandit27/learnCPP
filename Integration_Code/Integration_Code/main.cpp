@@ -24,6 +24,17 @@ int Paths[4][25] = { {38,46,58,87,145,203,319,253,209,187,143,91,65,39,26,34,51,
 
 int CoinCountInPosition[25] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
+void init_coin_center_flag()
+{
+	for (int a = 0; a < 4; a = a + 1)
+	{
+		for (int b = 0; b < 4; b = b + 1)
+		{
+			User[a].Coin[b].Select_Other_Coin = NO_REQ;
+		}
+	}
+}
+
 int rolldice(void)
 {
 	// Input: void
@@ -194,6 +205,7 @@ void GamePlay(void) {
 		{
 			cout << User[i].name << "'s turn" << endl;
 			do {
+				
 				dice_value = rolldice();
 #ifdef TEST_CODE
 				static int l = 0;
@@ -223,10 +235,30 @@ void GamePlay(void) {
 				User[i].Coin[selected_coin].Position = MoveCoin(selected_coin, dice_value, i);
 				while (User[i].Coin[selected_coin].Select_Other_Coin == YES_CHANGE)
 				{
-					cout << "Please select coin other then coin  " << selected_coin << endl;
-					cin >> selected_coin;
+				//	cout << "Please select coin other then coin  " << selected_coin << endl;
+					for (int a = 0; a < 4; a++)
+					{
+						if (User[i].Coin[a].Finish_flag != FINISH)
+						{
+							User[i].Coin[a].Position = MoveCoin(a, dice_value, i);
+							if (User[i].Coin[a].Select_Other_Coin == NO_REQ)
+							{
+								cout << "Coin " << a << " is available for move" << endl;
+							}
+							else if (User[i].Coin[a].Select_Other_Coin == YES_CHANGE)
+							{
+								cout << "Coin " << a << " is not available for move" << endl;
+							}
+						}
+					}
+					while (User[i].Coin[selected_coin].Select_Other_Coin == YES_CHANGE)
+					{
+						cin >> selected_coin;
+						cout << "Please select other available coin as indicated" << endl;
+					}
 					User[i].Coin[selected_coin].Select_Other_Coin = NO_REQ;
-					User[i].Coin[selected_coin].Position = MoveCoin(selected_coin, dice_value, i);
+					init_coin_center_flag();
+					//User[i].Coin[selected_coin].Position = MoveCoin(selected_coin, dice_value, i);
 				}
 				int coll_arr[2] = { 0 };
 				primeFactors(User[i].Coin[selected_coin].Position, coll_arr);
