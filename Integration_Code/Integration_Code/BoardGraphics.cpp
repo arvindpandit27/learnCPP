@@ -3,9 +3,7 @@
 #include "typedefs.hpp"
 
 using namespace sf;
-
 RenderWindow renderWindow(VideoMode(800, 800), "Chowka Bhaara");
-
 
 void moveCoinPosition(CircleShape shape, RenderWindow* renderWindow, int row_value, int column_value, int draw_position, int solo_coin_flag, int coin_blink_flag)
 {
@@ -87,11 +85,11 @@ void moveCoinPosition(CircleShape shape, RenderWindow* renderWindow, int row_val
 
 void BoardGraphics(Player User[], int NPlayers)
 {
-	// Input: Player number
+	// Input: Player objects and number of players
 	// Output: Display/Draw the main board
-	// Purpose: 
+	// Purpose: To display visual aspects of Chowka Bhaara
 	RenderWindow renderWindow(VideoMode(800, 800), "Chowka Bhaara");
-	Event event;
+	renderWindow.setFramerateLimit(60);
 
 	RectangleShape sq(Vector2f{ 100,100 });
 	RectangleShape rectangle1(Vector2f(4, 100 * (float)sqrt(2))); // change the size to 100x100 rectangle.setSize(sf::Vector2f(100, 100));
@@ -140,6 +138,7 @@ void BoardGraphics(Player User[], int NPlayers)
 
 	while (renderWindow.isOpen())
 	{
+		Event event;
 		while (renderWindow.pollEvent(event)) {
 			if (event.type == sf::Event::EventType::Closed)
 				renderWindow.close();

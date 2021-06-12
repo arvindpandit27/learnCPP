@@ -11,7 +11,7 @@
 #include "Utils.hpp"
 #include <random>
 
-int NPlayers;
+int NPlayers = 0;
 Player* User;
 //#define TEST_CODE
 
@@ -179,7 +179,7 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 void HighlightCoins(int dice_value, int player_number) {
 	int current_position_index = 0;
 	int new_position_index = 0;
-	for (int np = 0; np < 2; np++) {
+	for (int np = 0; np < NPlayers; np++) {
 		for (int nc = 0; nc < 4; nc++) {
 			User[np].Coin[nc].Select_Other_Coin = YES_CHANGE;
 			if (player_number == np) {
@@ -331,7 +331,7 @@ int main(int argc, char** argv)
 			<< " player colour" << endl;
 		cin >> name;
 
-		while (CheckColorValidity(name, i, User)) {
+		while (CheckColorValidity(name, i, User) == 1) {
 			cin >> name;
 		}
 		User[i].colourName = name;
