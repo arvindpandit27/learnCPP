@@ -30,7 +30,7 @@ void init_coin_center_flag()
 	{
 		for (int b = 0; b < 4; b = b + 1)
 		{
-			User[a].Coin[b].Select_Other_Coin = NO_REQ;
+			User[a].Coin[b].Select_Other_Coin = YES_CHANGE;
 		}
 	}
 }
@@ -290,7 +290,7 @@ void GamePlay(void) {
 				findXYinBoard(coll_arr[0], coll_arr[1], index);
 				User[i].Coin[selected_coin].xPos = index[0];
 				User[i].Coin[selected_coin].yPos = index[1];
-
+				init_coin_center_flag();
 				for (int k = 0; k < 4; k++)
 				{
 					if (User[i].Coin[k].Position == 95)
