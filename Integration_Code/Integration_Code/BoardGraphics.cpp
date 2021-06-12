@@ -7,11 +7,26 @@ using namespace sf;
 RenderWindow renderWindow(VideoMode(800, 800), "Chowka Bhaara");
 
 
-void moveCoinPosition(CircleShape shape, RenderWindow* renderWindow, int row_value, int column_value, int draw_position, int solo_coin_flag)
+void moveCoinPosition(CircleShape shape, RenderWindow* renderWindow, int row_value, int column_value, int draw_position, int solo_coin_flag, int coin_blink_flag)
 {
 	// Input: Coin shape, Graphics board, row and column value
 	// Output: Draw the coin shape in the updated position
-	// Purpose: To update coin position and interface with graphics  
+	// Purpose: To update coin position and interface with graphics
+	static Clock clock;
+	Color actual_color;
+
+	if (coin_blink_flag == 0) {
+		actual_color = shape.getFillColor();
+		float test;
+		test = clock.getElapsedTime().asSeconds();
+		if (clock.getElapsedTime().asSeconds() < 0.5f)
+			shape.setFillColor(actual_color);
+		else if (clock.getElapsedTime().asSeconds() > 0.5f && clock.getElapsedTime().asSeconds() < 1.0) 
+			shape.setFillColor(Color(0,0,0));
+		else 
+			clock.restart();
+	}
+
 	if (solo_coin_flag == 1) {
 		shape.setPosition({ (float)(105 * column_value + 137.5), (float)(105 * row_value + 137.5) });
 	}
@@ -158,16 +173,16 @@ void BoardGraphics(Player User[], int NPlayers)
 			for (int nc = 0; nc < 4; nc++) {
 				switch (nc) {
 				case 0:
-					moveCoinPosition(Triangle[np], &renderWindow, User[np].Coin[nc].xPos, User[np].Coin[nc].yPos, User[np].Coin[nc].DrawPosition, User[np].Coin[nc].SoloCoinFlag);
+					moveCoinPosition(Triangle[np], &renderWindow, User[np].Coin[nc].xPos, User[np].Coin[nc].yPos, User[np].Coin[nc].DrawPosition, User[np].Coin[nc].SoloCoinFlag, User[np].Coin[nc].Select_Other_Coin);
 					break;
 				case 1:
-					moveCoinPosition(Diamond[np], &renderWindow, User[np].Coin[nc].xPos, User[np].Coin[nc].yPos, User[np].Coin[nc].DrawPosition, User[np].Coin[nc].SoloCoinFlag);
+					moveCoinPosition(Diamond[np], &renderWindow, User[np].Coin[nc].xPos, User[np].Coin[nc].yPos, User[np].Coin[nc].DrawPosition, User[np].Coin[nc].SoloCoinFlag, User[np].Coin[nc].Select_Other_Coin);
 					break;
 				case 2:
-					moveCoinPosition(Pentagon[np], &renderWindow, User[np].Coin[nc].xPos, User[np].Coin[nc].yPos, User[np].Coin[nc].DrawPosition, User[np].Coin[nc].SoloCoinFlag);
+					moveCoinPosition(Pentagon[np], &renderWindow, User[np].Coin[nc].xPos, User[np].Coin[nc].yPos, User[np].Coin[nc].DrawPosition, User[np].Coin[nc].SoloCoinFlag, User[np].Coin[nc].Select_Other_Coin);
 					break;
 				case 3:
-					moveCoinPosition(Hexagon[np], &renderWindow, User[np].Coin[nc].xPos, User[np].Coin[nc].yPos, User[np].Coin[nc].DrawPosition, User[np].Coin[nc].SoloCoinFlag);
+					moveCoinPosition(Hexagon[np], &renderWindow, User[np].Coin[nc].xPos, User[np].Coin[nc].yPos, User[np].Coin[nc].DrawPosition, User[np].Coin[nc].SoloCoinFlag, User[np].Coin[nc].Select_Other_Coin);
 					break;
 				}
 			}

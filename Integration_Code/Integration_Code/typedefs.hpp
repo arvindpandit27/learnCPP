@@ -29,7 +29,7 @@ public:
 	int DrawPosition = 0;
 	int SoloCoinFlag = 0;
 	uint8_t Finish_flag = START;
-	uint8_t Select_Other_Coin = NO_REQ;
+	uint8_t Select_Other_Coin = YES_CHANGE;
 };
 
 class Player {
@@ -37,7 +37,7 @@ public:
 	string name;
 	string colourName;
 	Colour_t colour;
-	Coins Coin[7];
+	Coins Coin[4];
 	uint8_t inner_loop_access = NO_ACCESS;
 	uint8_t check_to_repat = NONE;
 };
