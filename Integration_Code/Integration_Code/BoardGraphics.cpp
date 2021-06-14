@@ -91,6 +91,13 @@ void BoardGraphics(Player User[], int NPlayers)
 	RenderWindow renderWindow(VideoMode(800, 800), "Chowka Bhaara");
 	renderWindow.setFramerateLimit(60);
 
+	RectangleShape player(Vector2f(50.0f, 50.0f));
+	player.setPosition(0.0f, 0.0f);
+	Texture playerTexture;
+	playerTexture.loadFromFile("tux_from_linux.png");
+	player.setTexture(&playerTexture);
+
+
 	RectangleShape sq(Vector2f{ 100,100 });
 	RectangleShape rectangle1(Vector2f(4, 100 * (float)sqrt(2))); // change the size to 100x100 rectangle.setSize(sf::Vector2f(100, 100));
 	RectangleShape rectangle2(Vector2f(4, 100 * (float)sqrt(2)));
@@ -186,6 +193,10 @@ void BoardGraphics(Player User[], int NPlayers)
 				}
 			}
 		}
+
+		//renderWindow.clear();
+		renderWindow.display();
+		renderWindow.draw(player);
 		renderWindow.display();
 	}
 }
