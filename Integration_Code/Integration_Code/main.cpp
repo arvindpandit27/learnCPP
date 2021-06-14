@@ -10,7 +10,9 @@
 #include "UserInput.hpp"
 #include "Utils.hpp"
 #include <random>
+#include <SFML\Graphics.hpp>
 
+using namespace sf;
 int NPlayers = 0;
 Player* User;
 //#define TEST_CODE
@@ -337,6 +339,29 @@ int main(int argc, char** argv)
 		User[i].colourName = name;
 	}
 
+	RenderWindow window(VideoMode(800, 800), "Dice Sheet");
+	RectangleShape player(Vector2f(500.0f, 500.0f));
+	player.setPosition(206.0f, 206.0f);
+	Texture playerTexture; 
+	playerTexture.loadFromFile("tux_from_linux.png");
+	player.setTexture(&playerTexture);
+
+	while (window.isOpen())
+	{
+		Event event; 
+		while (window.pollEvent(event));
+		{
+			switch (event.type)
+			{
+			case :: Event ::Closed:
+				window.close();
+				break;
+			}
+		}
+		window.clear();
+		window.draw(player);
+		window.display();
+	}
 	thread t1(BoardGraphics,User,NPlayers);
 	thread t2(GamePlay);
 
