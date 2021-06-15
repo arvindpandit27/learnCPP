@@ -91,12 +91,19 @@ void BoardGraphics(Player User[], int NPlayers)
 	RenderWindow renderWindow(VideoMode(800, 800), "Chowka Bhaara");
 	renderWindow.setFramerateLimit(60);
 
-	RectangleShape player(Vector2f(50.0f, 50.0f));
-	player.setPosition(0.0f, 0.0f);
+	RectangleShape player(Vector2f(100.0f, 100.0f));
+	player.setPosition(650.0f, 250.0f);
 	Texture playerTexture;
-	playerTexture.loadFromFile("tux_from_linux.png");
+	playerTexture.loadFromFile("Dice_sheet.png");
 	player.setTexture(&playerTexture);
 
+	Vector2u textureSize = playerTexture.getSize();
+	textureSize.x /= 4; //x value starts from zero, it goes horizontal
+	textureSize.y /= 5; //y value starts from zero 4 coloumns, it goes vertical
+
+	//player.setTextureRect(IntRect(textureSize.x*0,textureSize.y*0,textureSize.x, textureSize.y));
+
+	Clock clock;
 
 	RectangleShape sq(Vector2f{ 100,100 });
 	RectangleShape rectangle1(Vector2f(4, 100 * (float)sqrt(2))); // change the size to 100x100 rectangle.setSize(sf::Vector2f(100, 100));
@@ -194,8 +201,72 @@ void BoardGraphics(Player User[], int NPlayers)
 			}
 		}
 
+		//if (clock.getElapsedTime().asSeconds() > 1.0f)
+		//{
+		//	for (int a = 0; a <= 3; a++)
+		//	{
+		//		textureSize.x = a;
+		//		for (int b = 0; b <= 4; b++)
+		//		{
+		//			textureSize.y = b;
+		//			player.setTextureRect(IntRect(textureSize.x *a, textureSize.y * b, textureSize.x, textureSize.y));
+		//		}
+		//	}
+		//}
+		static int select_pos = 0;
+		if (clock.getElapsedTime().asSeconds() > 0.05f)
+		{
+			switch (select_pos)
+			{
+				case 0:
+					player.setTextureRect(IntRect(textureSize.x * 0, textureSize.y * 0, textureSize.x, textureSize.y));
+					select_pos = 1;
+				break;
+				case 1 :
+					player.setTextureRect(IntRect(textureSize.x * 1, textureSize.y * 0, textureSize.x, textureSize.y));
+					select_pos = 2;
+				break;
+				case 2:
+					player.setTextureRect(IntRect(textureSize.x * 2, textureSize.y * 0, textureSize.x, textureSize.y));
+					select_pos = 3;
+				break;
+				case 3:
+					player.setTextureRect(IntRect(textureSize.x * 3, textureSize.y * 0, textureSize.x, textureSize.y));
+					select_pos = 4;
+				break;
+				case 4:
+					player.setTextureRect(IntRect(textureSize.x * 0, textureSize.y * 1, textureSize.x, textureSize.y));
+					select_pos = 5;
+				break;
+				case 5:
+					player.setTextureRect(IntRect(textureSize.x * 1, textureSize.y * 1, textureSize.x, textureSize.y));
+					select_pos = 6;
+					break;
+				case 6:
+					player.setTextureRect(IntRect(textureSize.x * 2, textureSize.y * 1, textureSize.x, textureSize.y));
+					select_pos = 7;
+					break;
+				case 7:
+					player.setTextureRect(IntRect(textureSize.x * 3, textureSize.y * 1, textureSize.x, textureSize.y));
+					select_pos = 8;
+					break;
+				case 8:
+					player.setTextureRect(IntRect(textureSize.x * 0, textureSize.y * 2, textureSize.x, textureSize.y));
+					select_pos = 9;
+					break;
+				case 9:
+					player.setTextureRect(IntRect(textureSize.x * 1, textureSize.y * 2, textureSize.x, textureSize.y));
+					select_pos = 0;
+					break;
+
+			default:
+				break;
+			}
+
+			clock.restart();
+		}
 		//renderWindow.clear();
-		renderWindow.display();
+		//renderWindow.display();
 		renderWindow.draw(player);
 		renderWindow.display();
 	}
