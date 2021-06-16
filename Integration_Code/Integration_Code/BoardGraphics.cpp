@@ -240,9 +240,6 @@ void BoardGraphics(Player User[], int NPlayers)
 			{
 				switch (User[0].roll_dice_value)
 				{
-				User[0].roll_dice_flag = NONE;
-				x_value = 0;
-				y_value = 0;
 				case 1:
 					player.setTextureRect(IntRect(textureSize.x * 0, textureSize.y * 0, textureSize.x, textureSize.y));
 					break;
@@ -261,6 +258,10 @@ void BoardGraphics(Player User[], int NPlayers)
 				default:
 					break;
 				}
+				User[0].roll_dice_flag = NONE;
+				x_value = 0;
+				y_value = 0;
+				z_value = 0;
 			}
 		}
 
