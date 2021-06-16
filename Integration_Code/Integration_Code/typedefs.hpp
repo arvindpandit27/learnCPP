@@ -12,6 +12,7 @@ using namespace std;
 #define FINISH 1
 #define NO_REQ 0
 #define YES_CHANGE 1
+#define ROLL_DONE 1
 
 
 typedef enum {
@@ -41,6 +42,7 @@ public:
 	uint8_t inner_loop_access = NO_ACCESS;
 	uint8_t check_to_repat = NONE;
 	uint8_t roll_dice_value;
+	uint8_t roll_dice_flag = NONE;
 };
 
 

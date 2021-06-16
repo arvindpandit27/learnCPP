@@ -231,9 +231,10 @@ void GamePlay(void) {
 		{
 			cout << User[i].name << "'s turn" << endl;
 			do {
-				
+				User[i].roll_dice_flag = NONE;
 				dice_value = rolldice();
 				User[i].roll_dice_value = dice_value;
+				User[i].roll_dice_flag = ROLL_DONE;
 #ifdef TEST_CODE
 				static int l = 0;
 				if ((i == 0) && (l == 0))
