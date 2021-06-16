@@ -233,6 +233,7 @@ void GamePlay(void) {
 			do {
 				
 				dice_value = rolldice();
+				User[i].roll_dice_value = dice_value;
 #ifdef TEST_CODE
 				static int l = 0;
 				if ((i == 0) && (l == 0))

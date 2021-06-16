@@ -40,6 +40,7 @@ public:
 	Coins Coin[4];
 	uint8_t inner_loop_access = NO_ACCESS;
 	uint8_t check_to_repat = NONE;
+	uint8_t roll_dice_value;
 };
 
 
