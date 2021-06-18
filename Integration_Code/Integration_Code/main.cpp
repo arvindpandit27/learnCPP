@@ -15,6 +15,7 @@
 using namespace sf;
 int NPlayers = 0;
 Player* User;
+uint8_t Current_Play_number = 5;
 //#define TEST_CODE
 
 // Stores an array of traceable path which contains prime product indices 
@@ -235,6 +236,7 @@ void GamePlay(void) {
 				dice_value = rolldice();
 				User[i].roll_dice_value = dice_value;
 				User[i].roll_dice_flag = ROLL_DONE;
+				Current_Play_number = i;
 #ifdef TEST_CODE
 				static int l = 0;
 				if ((i == 0) && (l == 0))

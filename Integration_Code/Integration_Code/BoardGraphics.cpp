@@ -4,6 +4,7 @@
 
 using namespace sf;
 RenderWindow renderWindow(VideoMode(800, 800), "Chowka Bhaara");
+extern uint8_t Current_Play_number;
 
 
 void moveCoinPosition(CircleShape shape, RenderWindow* renderWindow, int row_value, int column_value, int draw_position, int solo_coin_flag, int coin_blink_flag)
@@ -216,11 +217,10 @@ void BoardGraphics(Player User[], int NPlayers)
 		//}
 
 		static uint8_t x_value = 0, y_value = 0, z_value = 0;
-		static uint8_t prev_roll_flag = 0;
 
-		if (User[0].roll_dice_flag == ROLL_DONE)
+		if (User[Current_Play_number].roll_dice_flag == ROLL_DONE)
 		{
-			if ((clock.getElapsedTime().asSeconds() > 0.1f) && (z_value < 2))
+			if ((clock.getElapsedTime().asSeconds() > 0.01f) && (z_value < 2))
 			{
 				player.setTextureRect(IntRect(textureSize.x * x_value, textureSize.y * y_value, textureSize.x, textureSize.y));
 				x_value = x_value + 1;
@@ -238,7 +238,7 @@ void BoardGraphics(Player User[], int NPlayers)
 			}
 			else if(z_value == 2)
 			{
-				switch (User[0].roll_dice_value)
+				switch (User[Current_Play_number].roll_dice_value)
 				{
 				case 1:
 					player.setTextureRect(IntRect(textureSize.x * 0, textureSize.y * 0, textureSize.x, textureSize.y));
@@ -258,15 +258,13 @@ void BoardGraphics(Player User[], int NPlayers)
 				default:
 					break;
 				}
-				User[0].roll_dice_flag = NONE;
+				User[Current_Play_number].roll_dice_flag = NONE;
 				x_value = 0;
 				y_value = 0;
 				z_value = 0;
 			}
 		}
 
-
-		prev_roll_flag = User[0].roll_dice_flag;
 		//renderWindow.clear();
 		//renderWindow.display();
 		renderWindow.draw(player);
