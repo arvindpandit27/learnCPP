@@ -1,3 +1,3 @@
 #pragma once
 
-int CheckColorValidity(const std::string& input, int i, Player players[]);
+int CheckColorValidity(char color_input, int i, Player players[]);
