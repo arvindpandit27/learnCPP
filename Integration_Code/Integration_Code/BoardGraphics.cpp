@@ -118,7 +118,7 @@ void BoardGraphics(Player User[], int NPlayers)
 	for (int n = 0; n < NPlayers; n++) {
 		Triangle[n].setPointCount(3);
 		Triangle[n].setRadius(15);
-		Triangle[n].setFillColor(Color(ColorMatrix[n][0], ColorMatrix[n][1], ColorMatrix[n][2]));
+		Triangle[n].setFillColor(Color(ColorMatrix[User[n].colour][0], ColorMatrix[User[n].colour][1], ColorMatrix[User[n].colour][2]));
 	}
 
 	// Initialize Diamonds
@@ -127,7 +127,7 @@ void BoardGraphics(Player User[], int NPlayers)
 	for (int n = 0; n < NPlayers; n++) {
 		Diamond[n].setPointCount(4);
 		Diamond[n].setRadius(15);
-		Diamond[n].setFillColor(Color(ColorMatrix[n][0], ColorMatrix[n][1], ColorMatrix[n][2]));
+		Diamond[n].setFillColor(Color(ColorMatrix[User[n].colour][0], ColorMatrix[User[n].colour][1], ColorMatrix[User[n].colour][2]));
 	}
 
 	// Initialize Pentagons
@@ -136,7 +136,7 @@ void BoardGraphics(Player User[], int NPlayers)
 	for (int n = 0; n < NPlayers; n++) {
 		Pentagon[n].setPointCount(5);
 		Pentagon[n].setRadius(15);
-		Pentagon[n].setFillColor(Color(ColorMatrix[n][0], ColorMatrix[n][1], ColorMatrix[n][2]));
+		Pentagon[n].setFillColor(Color(ColorMatrix[User[n].colour][0], ColorMatrix[User[n].colour][1], ColorMatrix[User[n].colour][2]));
 	}
 
 	// Initialize Hexagons
@@ -145,7 +145,7 @@ void BoardGraphics(Player User[], int NPlayers)
 	for (int n = 0; n < NPlayers; n++) {
 		Hexagon[n].setPointCount(6);
 		Hexagon[n].setRadius(15);
-		Hexagon[n].setFillColor(Color(ColorMatrix[n][0], ColorMatrix[n][1], ColorMatrix[n][2]));
+		Hexagon[n].setFillColor(Color(ColorMatrix[User[n].colour][0], ColorMatrix[User[n].colour][1], ColorMatrix[User[n].colour][2]));
 	}
 
 

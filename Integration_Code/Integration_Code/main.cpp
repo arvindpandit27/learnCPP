@@ -326,21 +326,21 @@ int main(int argc, char** argv)
 	for (int i = 0; i < NPlayers; i++)
 	{
 		string name;
+		char color_input;
 		cout << "Enter"
 			<< " " << i + 1 << " "
 			<< "player's name" << endl;
 		cin >> name;
 		User[i].name = name;
-		cout << "Choose the color RED, BLUE, GREEN OR YELLOW" << endl;
+		cout << "Enter 'r' for RED, 'b' for BLUE, 'g' for GREEN OR 'y' for YELLOW" << endl;
 		cout << "Enter"
 			<< " " << i + 1 << " "
 			<< " player colour" << endl;
-		cin >> name;
+		cin >> color_input;
 
-		while (CheckColorValidity(name, i, User) == 1) {
-			cin >> name;
+		while (CheckColorValidity(color_input, i, User) == 1) {
+			cin >> color_input;
 		}
-		User[i].colourName = name;
 	}
 
 	//RenderWindow window(VideoMode(800, 800), "Dice Sheet");

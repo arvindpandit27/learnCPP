@@ -19,7 +19,8 @@ typedef enum {
 	RED = 0,
 	BLUE = 1,
 	GREEN = 2,
-	YELLOW = 3
+	YELLOW = 3,
+	UNASSIGNED = 4
 }Colour_t;
 
 class Coins {
@@ -36,8 +37,7 @@ public:
 class Player {
 public:
 	string name;
-	string colourName;
-	Colour_t colour;
+	Colour_t colour = UNASSIGNED;
 	Coins Coin[4];
 	uint8_t inner_loop_access = NO_ACCESS;
 	uint8_t check_to_repat = NONE;
