@@ -1,2 +1,3 @@
-1. Player does not get another chance after a coin reaches center
-2.
+1. Player does not get another chance after a coin reaches center --> Possible Bug(Need to Clarify Rules)
+2. Doesn't automatically switch to next player if no move is possible --> Solved
+3. 

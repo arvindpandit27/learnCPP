@@ -20,12 +20,12 @@ uint8_t Current_Play_number = 5;
 
 // Stores an array of traceable path which contains prime product indices 
 
-int Paths[4][25] = { {38,46,58,87,145,203,319,253,209,187,143,91,65,39,26,34,51,85,119,133,161,115,69,57,95},	
+int Paths[4][25] = { {38,46,58,87,145,203,319,253,209,187,143,91,65,39,26,34,51,85,119,133,161,115,69,57,95},
 	{209,187,143,91,65,39,26,34,38,46,58,87,145,203,319,253,161,115,69,57,51,85,119,133,95},
 	{65,39,26,34,38,46,58,87,145,203,319,253,209,187,143,91,119,133,161,115,69,57,51,85,95},
 	{145,203,319,253,209,187,143,91,65,39,26,34,38,46,58,87,69,57,51,85,119,133,161,115,95} };
 
-int CoinCountInPosition[25] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+int CoinCountInPosition[25] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 
 void init_coin_center_flag()
 {
@@ -55,19 +55,19 @@ int rolldice(void)
 
 	if (ascii_code == 82 || ascii_code == 114)
 	{
-		std::random_device rd; 
-		std::mt19937 gen(rd()); 
+		std::random_device rd;
+		std::mt19937 gen(rd());
 		std::uniform_int_distribution<> distrib(1, 50);
 		dice_value = distrib(gen);
-		if (  (dice_value) >= 1 && (dice_value < 7)  ) 
+		if ((dice_value) >= 1 && (dice_value < 7))
 			dice_value = 1;
-		else if ( (dice_value >= 7) & (dice_value < 19) ) 
+		else if ((dice_value >= 7) & (dice_value < 19))
 			dice_value = 2;
-		else if (  (dice_value >= 19) & (dice_value < 33)  ) 
+		else if ((dice_value >= 19) & (dice_value < 33))
 			dice_value = 3;
-		else if (  (dice_value >= 33) & (dice_value < 41)  ) 
+		else if ((dice_value >= 33) & (dice_value < 41))
 			dice_value = 4;
-		else if (  (dice_value >= 41) & (dice_value <= 50) ) 
+		else if ((dice_value >= 41) & (dice_value <= 50))
 			dice_value = 8;
 	}
 	else
@@ -86,9 +86,9 @@ void AdjustCoinCount() {
 		CoinCountInPosition[n] = 0;
 		for (int np = 0; np < NPlayers; np++) {
 			for (int nc = 0; nc < 4; nc++) {
-				if (User[np].Coin[nc].Position == Paths[0][n]) { 
+				if (User[np].Coin[nc].Position == Paths[0][n]) {
 					User[np].Coin[nc].DrawPosition = CoinCountInPosition[n];
-					CoinCountInPosition[n]++; 
+					CoinCountInPosition[n]++;
 					ref_player = np;
 					ref_coin = nc;
 					User[np].Coin[nc].SoloCoinFlag = 0;
@@ -149,7 +149,7 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 	else {
 		board_position = Paths[player_number][new_position_index];
 		if (board_position != Paths[0][0] && board_position != Paths[1][0] && board_position != Paths[2][0] && board_position != Paths[3][0] && board_position != Paths[0][24]) {
-			for (int n = 0; n < NPlayers; n++) 
+			for (int n = 0; n < NPlayers; n++)
 			{
 				for (int k = 0; k < 4; k++)
 				{
@@ -186,18 +186,16 @@ void HighlightCoins(int dice_value, int player_number) {
 		for (int nc = 0; nc < 4; nc++) {
 			User[np].Coin[nc].Select_Other_Coin = YES_CHANGE;
 			if (player_number == np) {
-				current_position_index = FindIndex(User[np].Coin[nc].Position,np);
+				current_position_index = FindIndex(User[np].Coin[nc].Position, np);
 				new_position_index = current_position_index + dice_value;
-				if (new_position_index > 24 || (User[np].inner_loop_access == NO_ACCESS && new_position_index > WAIT_FOR_ACCESS_INDEX)) 
+				if (new_position_index > 24 || (User[np].inner_loop_access == NO_ACCESS && new_position_index > WAIT_FOR_ACCESS_INDEX))
 					User[np].Coin[nc].Select_Other_Coin = YES_CHANGE;
-				else 
+				else
 					User[np].Coin[nc].Select_Other_Coin = NO_REQ;
 			}
 		}
 	}
-
 }
-
 
 void GamePlay(void) {
 
@@ -257,39 +255,17 @@ void GamePlay(void) {
 #endif // TEST_CODE
 				cout << dice_value << endl;
 				HighlightCoins(dice_value, i);
+
+				if (User[i].Coin[0].Select_Other_Coin == YES_CHANGE && User[i].Coin[1].Select_Other_Coin == YES_CHANGE && User[i].Coin[2].Select_Other_Coin == YES_CHANGE && User[i].Coin[3].Select_Other_Coin == YES_CHANGE) {
+					cout << "No coin can be moved, switching to next player" << endl; // Inform current player that a move isn't possible
+					break; // Switch to next player
+				}
 				cout << "Select the" << User[i].name << "coin" << endl;
 				selected_coin = CoinSelect();
 				cin >> selected_coin;
 				//repeat_dice = 0;
 				User[i].check_to_repat = NONE;
 				User[i].Coin[selected_coin].Position = MoveCoin(selected_coin, dice_value, i);
-				//while (User[i].Coin[selected_coin].Select_Other_Coin == YES_CHANGE)
-				//{
-				////	cout << "Please select coin other then coin  " << selected_coin << endl;
-				//	for (int a = 0; a < 4; a++)
-				//	{
-				//		if (User[i].Coin[a].Finish_flag != FINISH)
-				//		{
-				//			User[i].Coin[a].Position = MoveCoin(a, dice_value, i);
-				//			if (User[i].Coin[a].Select_Other_Coin == NO_REQ)
-				//			{
-				//				cout << "Coin " << a << " is available for move" << endl;
-				//			}
-				//			else if (User[i].Coin[a].Select_Other_Coin == YES_CHANGE)
-				//			{
-				//				cout << "Coin " << a << " is not available for move" << endl;
-				//			}
-				//		}
-				//	}
-				//	while (User[i].Coin[selected_coin].Select_Other_Coin == YES_CHANGE)
-				//	{
-				//		cin >> selected_coin;
-				//		cout << "Please select other available coin as indicated" << endl;
-				//	}
-				//	User[i].Coin[selected_coin].Select_Other_Coin = NO_REQ;
-				//	init_coin_center_flag();
-				//	//User[i].Coin[selected_coin].Position = MoveCoin(selected_coin, dice_value, i);
-				//}
 				int coll_arr[2] = { 0 };
 				primeFactors(User[i].Coin[selected_coin].Position, coll_arr);
 				int index[2] = { 0 };
@@ -366,7 +342,7 @@ int main(int argc, char** argv)
 	//	window.draw(player);
 	//	window.display();
 	//}
-	thread t1(BoardGraphics,User,NPlayers);
+	thread t1(BoardGraphics, User, NPlayers);
 	thread t2(GamePlay);
 
 	t1.join();
