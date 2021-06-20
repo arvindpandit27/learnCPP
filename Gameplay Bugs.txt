@@ -1,0 +1,2 @@
+1. Player does not get another chance after a coin reaches center
+2.
