@@ -295,8 +295,11 @@ void GamePlay(void) {
 
 int main(int argc, char** argv)
 {
-	cout << "Enter number of players" << endl;
-	cin >> NPlayers;
+	while (NPlayers < 1 || NPlayers > 4) {
+		cout << "Enter number of players, minimum 1 and maximum 4" << endl;
+		cin >> NPlayers;
+	}
+
 	User = new Player[NPlayers];
 
 	for (int i = 0; i < NPlayers; i++)

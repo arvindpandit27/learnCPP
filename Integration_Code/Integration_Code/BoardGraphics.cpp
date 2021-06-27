@@ -93,10 +93,10 @@ void BoardGraphics(Player User[], int NPlayers)
 	RenderWindow renderWindow(VideoMode(800, 800), "Chowka Bhaara");
 	renderWindow.setFramerateLimit(60);
 
-	RectangleShape player(Vector2f(60.0f, 60.0f));
+	RectangleShape player(Vector2f(100.0f, 100.0f));
 	player.setPosition(650.0f, 250.0f);
 	Texture playerTexture;
-	playerTexture.loadFromFile("Black_dice.png");
+	playerTexture.loadFromFile("DiceSheet3D.png");
 	player.setTexture(&playerTexture);
 
 	Vector2u textureSize = playerTexture.getSize();
@@ -265,8 +265,6 @@ void BoardGraphics(Player User[], int NPlayers)
 			}
 		}
 
-		//renderWindow.clear();
-		//renderWindow.display();
 		renderWindow.draw(player);
 		renderWindow.display();
 	}
