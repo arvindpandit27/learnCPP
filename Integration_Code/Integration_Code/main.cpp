@@ -235,7 +235,7 @@ void GamePlay(void) {
 				User[i].roll_dice_value = dice_value;
 				User[i].roll_dice_flag = ROLL_DONE;
 				Current_Play_number = i;
-#ifdef TEST_CODE
+	#ifdef TEST_CODE
 				static int l = 0;
 				if ((i == 0) && (l == 0))
 				{
@@ -252,7 +252,7 @@ void GamePlay(void) {
 				{
 					dice_value = 1;
 				}
-#endif // TEST_CODE
+	#endif // TEST_CODE
 				cout << dice_value << endl;
 				HighlightCoins(dice_value, i);
 
@@ -321,7 +321,33 @@ int main(int argc, char** argv)
 			cin >> color_input;
 		}
 	}
-
+	string intel_colour;
+	if (NPlayers == 1)
+	{
+		string name_comp = "Intelligence";
+		if (User[0].colour == RED)
+		{
+			User[1].colour = BLUE;
+			intel_colour = "BLUE";
+		}
+		else if (User[0].colour == BLUE)
+		{
+			User[1].colour = GREEN;
+			intel_colour = "GREEN";
+		}
+		else if (User[0].colour == GREEN)
+		{
+			User[1].colour = YELLOW;
+			intel_colour = "YELLOW";
+		}
+		else if (User[0].colour == YELLOW)
+		{
+			User[1].colour = RED;
+			intel_colour = "RED";
+		}
+		cout << "Computer's name is " << name_comp << endl;
+		cout << "Computer's color is " << intel_colour << endl;
+	}
 	//RenderWindow window(VideoMode(800, 800), "Dice Sheet");
 	//RectangleShape player(Vector2f(500.0f, 500.0f));
 	//player.setPosition(206.0f, 206.0f);
