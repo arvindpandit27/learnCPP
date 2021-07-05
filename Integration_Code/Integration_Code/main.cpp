@@ -348,6 +348,7 @@ int main(int argc, char** argv)
 		cout << "Computer's name is " << name_comp << endl;
 		cout << "Computer's color is " << intel_colour << endl;
 	}
+	if (NPlayers == 1)NPlayers = 2;
 	//RenderWindow window(VideoMode(800, 800), "Dice Sheet");
 	//RectangleShape player(Vector2f(500.0f, 500.0f));
 	//player.setPosition(206.0f, 206.0f);
