@@ -16,6 +16,7 @@ using namespace sf;
 int NPlayers = 0;
 Player* User;
 uint8_t Current_Play_number = 5;
+uint8_t Computer_player_enable = 0;
 //#define TEST_CODE
 
 // Stores an array of traceable path which contains prime product indices 
@@ -295,14 +296,13 @@ void GamePlay(void) {
 
 int main(int argc, char** argv)
 {
-	static int player_select_flag = 0;
 	while (NPlayers < 1 || NPlayers > 4) {
 		cout << "Enter number of players, minimum 1 and maximum 4" << endl;
 		cin >> NPlayers;
 	}
 	if (NPlayers == 1)
 	{
-		player_select_flag = 1;
+		Computer_player_enable = 1;
 		NPlayers = 2;
 	}
 
@@ -310,7 +310,7 @@ int main(int argc, char** argv)
 
 	for (int i = 0; i < NPlayers; i++)
 	{
-		if ((i == 1) && (player_select_flag == 1))
+		if ((i == 1) && (Computer_player_enable == 1))
 		{
 			string intel_colour;
 			string name_comp = "Intelligence";
