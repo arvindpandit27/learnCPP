@@ -161,6 +161,7 @@ void BoardGraphics(Player User[], int NPlayers)
 		}
 		renderWindow.clear();
 
+		//Its used to draw squares on the board
 		for (int i = 0; i < 5; i++)
 		{
 			for (int j = 0; j < 5; j++)

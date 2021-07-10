@@ -295,60 +295,70 @@ void GamePlay(void) {
 
 int main(int argc, char** argv)
 {
+	static int player_select_flag = 0;
 	while (NPlayers < 1 || NPlayers > 4) {
 		cout << "Enter number of players, minimum 1 and maximum 4" << endl;
 		cin >> NPlayers;
+	}
+	if (NPlayers == 1)
+	{
+		player_select_flag = 1;
+		NPlayers = 2;
 	}
 
 	User = new Player[NPlayers];
 
 	for (int i = 0; i < NPlayers; i++)
 	{
-		string name;
-		char color_input;
-		cout << "Enter"
-			<< " " << i + 1 << " "
-			<< "player's name" << endl;
-		cin >> name;
-		User[i].name = name;
-		cout << "Enter 'r' for RED, 'b' for BLUE, 'g' for GREEN OR 'y' for YELLOW" << endl;
-		cout << "Enter"
-			<< " " << i + 1 << " "
-			<< " player colour" << endl;
-		cin >> color_input;
-
-		while (CheckColorValidity(color_input, i, User) == 1) {
+		if ((i == 1) && (player_select_flag == 1))
+		{
+			string intel_colour;
+			string name_comp = "Intelligence";
+			if (User[0].colour == RED)
+			{
+				User[1].colour = BLUE;
+				intel_colour = "BLUE";
+			}
+			else if (User[0].colour == BLUE)
+			{
+				User[1].colour = GREEN;
+				intel_colour = "GREEN";
+			}
+			else if (User[0].colour == GREEN)
+			{
+				User[1].colour = YELLOW;
+				intel_colour = "YELLOW";
+			}
+			else if (User[0].colour == YELLOW)
+			{
+				User[1].colour = RED;
+				intel_colour = "RED";
+			}
+			cout << "Computer will play against you, and it's name is " << name_comp << endl;
+			cout << "Computer's color is " << intel_colour << endl;
+		}
+		else
+		{
+			string name;
+			char color_input;
+			cout << "Enter"
+				<< " " << i + 1 << " "
+				<< "player's name" << endl;
+			cin >> name;
+			User[i].name = name;
+			cout << "Enter 'r' for RED, 'b' for BLUE, 'g' for GREEN OR 'y' for YELLOW" << endl;
+			cout << "Enter"
+				<< " " << i + 1 << " "
+				<< " player colour" << endl;
 			cin >> color_input;
+
+			while (CheckColorValidity(color_input, i, User) == 1) {
+				cin >> color_input;
+			}
 		}
 	}
-	string intel_colour;
-	if (NPlayers == 1)
-	{
-		string name_comp = "Intelligence";
-		if (User[0].colour == RED)
-		{
-			User[1].colour = BLUE;
-			intel_colour = "BLUE";
-		}
-		else if (User[0].colour == BLUE)
-		{
-			User[1].colour = GREEN;
-			intel_colour = "GREEN";
-		}
-		else if (User[0].colour == GREEN)
-		{
-			User[1].colour = YELLOW;
-			intel_colour = "YELLOW";
-		}
-		else if (User[0].colour == YELLOW)
-		{
-			User[1].colour = RED;
-			intel_colour = "RED";
-		}
-		cout << "Computer's name is " << name_comp << endl;
-		cout << "Computer's color is " << intel_colour << endl;
-	}
-	if (NPlayers == 1)NPlayers = 2;
+
+	
 	//RenderWindow window(VideoMode(800, 800), "Dice Sheet");
 	//RectangleShape player(Vector2f(500.0f, 500.0f));
 	//player.setPosition(206.0f, 206.0f);
