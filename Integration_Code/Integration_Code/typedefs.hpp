@@ -15,6 +15,12 @@ using namespace std;
 #define ROLL_DONE 1
 
 
+#define MOVE_KILL_COIN 3 //Put this value if computer can kill the coin
+#define MOVE_CENTER_COIN 2 //Put this value if computer can make it to center
+#define MOVE_MOVE_COIN 1 //Put this value if computer doesn't have inner loop access and just make a move
+#define NO_MOVE_COIN 0 //If you don't wanna move this coin
+
+
 typedef enum {
 	RED = 0,
 	BLUE = 1,
@@ -32,6 +38,7 @@ public:
 	int SoloCoinFlag = 0;
 	uint8_t Finish_flag = START;
 	uint8_t Select_Other_Coin = YES_CHANGE;
+	uint8_t computer_move_value = 0;
 };
 
 class Player {

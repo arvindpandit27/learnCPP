@@ -17,6 +17,7 @@ int NPlayers = 0;
 Player* User;
 uint8_t Current_Play_number = 5;
 uint8_t Computer_player_enable = 0;
+Clock comp_clock;
 //#define TEST_CODE
 
 // Stores an array of traceable path which contains prime product indices 
@@ -98,6 +99,10 @@ int rolldice()
 	return dice_value;
 }
 
+
+
+
+
 void AdjustCoinCount() {
 	// Purpose : Determine the number of coins in a given position
 	int ref_player;
@@ -129,6 +134,71 @@ int FindIndex(int board_position, int player_number) {
 	}
 	return ping_index;
 }
+
+
+void computer_move_coin(uint8_t dice_value, int player_number, uint8_t dice_number)
+{
+	int current_position_index = 0;
+	int new_position_index = 0;
+	int board_position = 0;
+	volatile uint8_t check_comp_access = 0;
+
+	board_position = User[player_number].Coin[dice_number].Position;
+	current_position_index = FindIndex(board_position, player_number);
+
+	new_position_index = current_position_index + dice_value;
+	//Check if it can kill opponent coin
+	board_position = Paths[player_number][new_position_index];
+
+	if (User[player_number].inner_loop_access == ACCESS_GRANTED)
+	{
+		User[player_number].Coin[dice_number].computer_move_value = MOVE_CENTER_COIN;
+	}
+	else
+	{
+		User[player_number].Coin[dice_number].computer_move_value = MOVE_MOVE_COIN;
+	}
+
+	if (board_position != Paths[0][0] && board_position != Paths[1][0] && board_position != Paths[2][0] && board_position != Paths[3][0] && board_position != Paths[0][24])
+	{
+		for (int n = 0; n < NPlayers; n++)
+		{
+			for (int k = 0; k < 4; k++)
+			{
+				//cout << User[n].Coin[Selected_Coin].Position << endl;
+				if (n != player_number && board_position == User[n].Coin[k].Position)
+				{
+					User[player_number].Coin[dice_number].computer_move_value = MOVE_KILL_COIN;
+				}
+			}
+		}
+	}
+}
+
+
+
+uint8_t computer_coin_selection(uint8_t dice_output)
+{
+	static uint8_t max_num = 0, max_num_nc = 0;
+	for (int nc = 0; nc < 4; nc++)
+	{
+		if (User[Current_Play_number].Coin[nc].Select_Other_Coin == YES_CHANGE)
+		{
+			User[Current_Play_number].Coin[nc].computer_move_value = NO_MOVE_COIN;
+		}
+		else
+		{
+			computer_move_coin(dice_output, Current_Play_number, nc);
+		}
+		if (User[Current_Play_number].Coin[nc].computer_move_value > max_num)
+		{
+			max_num = User[Current_Play_number].Coin[nc].computer_move_value;
+			max_num_nc = nc;
+		}
+	}
+	return max_num_nc;
+}
+
 
 int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 	// Input: Select a coin out of 4 coins, Dice value returned by roll dice, Player
@@ -293,9 +363,25 @@ void GamePlay(void) {
 					cout << "No coin can be moved, switching to next player" << endl; // Inform current player that a move isn't possible
 					break; // Switch to next player
 				}
-				cout << "Select the" << User[i].name << "coin" << endl;
-				selected_coin = CoinSelect();
-				cin >> selected_coin;
+
+				if ((i == 1) && (Computer_player_enable == 1))
+				{
+					
+					while ((comp_clock.getElapsedTime().asSeconds() < 3.0f))
+					{
+						;	//do nothing
+					}
+					selected_coin = computer_coin_selection(dice_value);
+					
+				}
+				else
+				{
+					cout << "Select the" << User[i].name << "coin" << endl;
+					selected_coin = CoinSelect();
+					cin >> selected_coin;
+
+				}
+				comp_clock.restart();
 				//repeat_dice = 0;
 				User[i].check_to_repat = NONE;
 				User[i].Coin[selected_coin].Position = MoveCoin(selected_coin, dice_value, i);
