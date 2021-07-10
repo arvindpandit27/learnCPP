@@ -199,6 +199,7 @@ int MoveCoin(int Selected_Coin, int dice_value, int player_number) {
 	return board_position;
 }
 
+//This function selects which coin out of four coins have access to move based on dice value
 void HighlightCoins(int dice_value, int player_number) {
 	int current_position_index = 0;
 	int new_position_index = 0;
