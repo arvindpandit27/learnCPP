@@ -39,22 +39,17 @@ void init_coin_center_flag()
 	}
 }
 
-int rolldice(void)
+int rolldice()
 {
 	// Input: void
 	// Output: Dice value from 1 to 8
 	// Purpose : Function to return a dice value to move coins
 	srand((unsigned int)time(NULL));
-
 	int dice_value;
 	char keyboard_input;
 	int ascii_code;
 
-	cout << "Press r to roll dice" << endl;
-	cin >> keyboard_input;
-	ascii_code = (int)keyboard_input;
-
-	if (ascii_code == 82 || ascii_code == 114)
+	if ((Current_Play_number == 1) && (Computer_player_enable == 1))
 	{
 		std::random_device rd;
 		std::mt19937 gen(rd());
@@ -70,11 +65,35 @@ int rolldice(void)
 			dice_value = 4;
 		else if ((dice_value >= 41) & (dice_value <= 50))
 			dice_value = 8;
+		return dice_value;
 	}
 	else
 	{
-		cout << "r wasn't entered" << endl;
-		dice_value = 0;
+		cout << "Press r to roll dice" << endl;
+		cin >> keyboard_input;
+		ascii_code = (int)keyboard_input;
+		if (ascii_code == 82 || ascii_code == 114)
+		{
+			std::random_device rd;
+			std::mt19937 gen(rd());
+			std::uniform_int_distribution<> distrib(1, 50);
+			dice_value = distrib(gen);
+			if ((dice_value) >= 1 && (dice_value < 7))
+				dice_value = 1;
+			else if ((dice_value >= 7) & (dice_value < 19))
+				dice_value = 2;
+			else if ((dice_value >= 19) & (dice_value < 33))
+				dice_value = 3;
+			else if ((dice_value >= 33) & (dice_value < 41))
+				dice_value = 4;
+			else if ((dice_value >= 41) & (dice_value <= 50))
+				dice_value = 8;
+		}
+		else
+		{
+			cout << "r wasn't entered" << endl;
+			dice_value = 0;
+		}
 	}
 	return dice_value;
 }
@@ -227,15 +246,27 @@ void GamePlay(void) {
 
 	while (!Finished)
 	{
-		for (int i = 0; i < NPlayers; i++)
+		for (uint8_t i = 0; i < NPlayers; i++)
 		{
 			cout << User[i].name << "'s turn" << endl;
 			do {
-				User[i].roll_dice_flag = NONE;
-				dice_value = rolldice();
-				User[i].roll_dice_value = dice_value;
-				User[i].roll_dice_flag = ROLL_DONE;
 				Current_Play_number = i;
+				if ((i == 1) && (Computer_player_enable == 1))
+				{
+					User[i].roll_dice_flag = NONE;
+					dice_value = rolldice();
+					User[i].roll_dice_value = dice_value;
+					User[i].roll_dice_flag = ROLL_DONE;
+					
+				}
+				else
+				{
+					User[i].roll_dice_flag = NONE;
+					dice_value = rolldice();
+					User[i].roll_dice_value = dice_value;
+					User[i].roll_dice_flag = ROLL_DONE;
+					
+				}
 	#ifdef TEST_CODE
 				static int l = 0;
 				if ((i == 0) && (l == 0))
