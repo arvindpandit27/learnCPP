@@ -15,9 +15,10 @@ using namespace std;
 #define ROLL_DONE 1
 
 
-#define MOVE_KILL_COIN 3 //Put this value if computer can kill the coin
+#define MOVE_KILL_COIN 4 //Put this value if computer can kill the coin
+#define MOVE_FINISH_COIN 3
 #define MOVE_CENTER_COIN 2 //Put this value if computer can make it to center
-#define MOVE_MOVE_COIN 1 //Put this value if computer doesn't have inner loop access and just make a move
+#define MOVE_JUST_COIN 1 //Put this value if computer doesn't have inner loop access and just make a move
 #define NO_MOVE_COIN 0 //If you don't wanna move this coin
 
 

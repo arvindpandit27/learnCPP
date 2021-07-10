@@ -152,11 +152,22 @@ void computer_move_coin(uint8_t dice_value, int player_number, uint8_t dice_numb
 
 	if (User[player_number].inner_loop_access == ACCESS_GRANTED)
 	{
-		User[player_number].Coin[dice_number].computer_move_value = MOVE_CENTER_COIN;
+		if (new_position_index > 24)
+		{
+			User[player_number].Coin[dice_number].computer_move_value = NO_MOVE_COIN;
+		}
+		else if(new_position_index > 15)
+		{
+			User[player_number].Coin[dice_number].computer_move_value = MOVE_CENTER_COIN;
+		}
+		else
+		{
+			User[player_number].Coin[dice_number].computer_move_value = MOVE_JUST_COIN;
+		}
 	}
 	else
 	{
-		User[player_number].Coin[dice_number].computer_move_value = MOVE_MOVE_COIN;
+		User[player_number].Coin[dice_number].computer_move_value = MOVE_JUST_COIN;
 	}
 
 	if (board_position != Paths[0][0] && board_position != Paths[1][0] && board_position != Paths[2][0] && board_position != Paths[3][0] && board_position != Paths[0][24])
@@ -179,7 +190,7 @@ void computer_move_coin(uint8_t dice_value, int player_number, uint8_t dice_numb
 
 uint8_t computer_coin_selection(uint8_t dice_output)
 {
-	static uint8_t max_num = 0, max_num_nc = 0;
+	uint8_t max_num = 0, max_num_nc = 0;
 	for (int nc = 0; nc < 4; nc++)
 	{
 		if (User[Current_Play_number].Coin[nc].Select_Other_Coin == YES_CHANGE)
@@ -367,7 +378,7 @@ void GamePlay(void) {
 				if ((i == 1) && (Computer_player_enable == 1))
 				{
 					
-					while ((comp_clock.getElapsedTime().asSeconds() < 3.0f))
+					while ((comp_clock.getElapsedTime().asSeconds() < 2.0f))
 					{
 						;	//do nothing
 					}
@@ -432,6 +443,7 @@ int main(int argc, char** argv)
 		{
 			string intel_colour;
 			string name_comp = "Intelligence";
+			User[1].name = name_comp;
 			if (User[0].colour == RED)
 			{
 				User[1].colour = BLUE;
