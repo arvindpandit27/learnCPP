@@ -99,10 +99,6 @@ int rolldice()
 	return dice_value;
 }
 
-
-
-
-
 void AdjustCoinCount() {
 	// Purpose : Determine the number of coins in a given position
 	int ref_player;
@@ -185,8 +181,6 @@ void computer_move_coin(uint8_t dice_value, int player_number, uint8_t dice_numb
 		}
 	}
 }
-
-
 
 uint8_t computer_coin_selection(uint8_t dice_output)
 {
@@ -387,9 +381,13 @@ void GamePlay(void) {
 				}
 				else
 				{
-					cout << "Select the" << User[i].name << "coin" << endl;
+					cout << "Select the " << User[i].name << "coin" << endl;
 					selected_coin = CoinSelect();
 					cin >> selected_coin;
+					if (selected_coin > 3 || selected_coin < 0) {
+						cout << selected_coin << " is an invalid value, please enter a number between 0 and 3" << endl;
+						cin >> selected_coin;
+					}
 
 				}
 				comp_clock.restart();
