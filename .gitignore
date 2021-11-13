@@ -38,6 +38,11 @@ ipch/
 *.VC.db
 *.VC.VC.opendb
 *.exe
+*.tlog
+*.ilk
+*.recipe
+*.pdb
+*.idb
 Integration_Code/Integration_Code/Release/BoardGraphics.obj
 Integration_Code/Integration_Code/Release/CheckUserInputs.obj
 Integration_Code/Integration_Code/Release/Integration_Code.exe.recipe
